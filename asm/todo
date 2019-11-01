@@ -1,0 +1,5 @@
+- A way to scan the text
+- A way to map the instructions to opcodes
+- A way to fetch extra arguments following an instruction like literal data and stuff that into the opcode stream
+- A symbol table to store placeholder address labels in
+- A second pass once the size of the code is known to resolve the placeholder addresses with real addresses
