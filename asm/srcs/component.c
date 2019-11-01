@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/01 11:04:01 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/01 11:28:09 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/01 17:14:55 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +25,39 @@ t_token	is_component(char *buffer, int index)
 	else if (is_direct(buffer, index))
 		return (direct_val);
 	else if (is_instruction(buffer, index))
+	{
+		ft_printf("%.5s\n", buffer[index]);
 		return (instruction);
-	else if (is_comment(buffer, index))
-		return (comment);
+	}
+	// else if (is_comment(buffer, index))
+	// 	return (comment);
 	else
 		return (none);
 }
 
+static int		ft_search_next_component(char *buffer, int index)
+{
+	int		i;
+
+	i = index;
+	while (buffer[i] && (buffer[i] == ' ' || \
+			buffer[i] == '\t' || buffer[i] == '\n'))
+		i++;
+	return (i - index);
+}
+
 void	create_component(t_file *in, t_component components[2048], int *index)
 {
-	t_component	component;
+	// t_component	component;
 	t_token		type;
-	char		*str;
 
+	(void)components;
 	if ((type = is_component(in->file_buffer, *index)) != none)
 	{
-		init_component(type, &component, in->file_buffer, *index);
+		// init_component(type, &component, in->file_buffer, *index);
+		// add_to_components(components, component);
 	}
-	else
-		print_error(lexical_error, Err, ft_itoa(index));
+	// else
+	// 	print_error(lexical_error, Err, ft_itoa(*index));
 	(*index) += ft_search_next_component(in->file_buffer, *index);
 }

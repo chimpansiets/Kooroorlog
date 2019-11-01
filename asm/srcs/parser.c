@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/01 09:26:16 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/01 11:04:12 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/01 17:13:52 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,5 @@ void	parse_components(t_file *in)
 	while (in->file_buffer[index] != '\0')
 	{
 		create_component(in, components, &index);
-		ft_printf("%i\n", components[0].pos);
 	}
 }
