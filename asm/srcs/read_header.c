@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   parser.c                                           :+:    :+:            */
+/*   read_header.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/11/01 09:26:16 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/02 17:00:47 by svoort        ########   odam.nl         */
+/*   Created: 2019/11/02 16:54:06 by svoort         #+#    #+#                */
+/*   Updated: 2019/11/02 16:54:56 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-void	parse_components(t_file *in)
+void	assign_champ_name_and_comment(t_file *in, int *index)
 {
-	t_component	components[2048];
-	int			index;
-
-	index = 0;
-	while (in->file_buffer[index] != '\0')
-	{
-		create_component(in, components, &index);
-	}
+	
 }

@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/02 09:42:47 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/02 12:00:50 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/02 14:03:46 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,22 @@ static void	init_reg_component(t_component *component, char *buffer, int index)
 	ft_printf("reg_pos: %i\n", component->pos);
 }
 
+static void	init_separator_component(t_component *component, char *buffer, int index)
+{
+	if (buffer[index] == ',')
+	{
+		component->type = separator;
+		component->len = 1;
+		component->pos = index;
+		component->str = ft_strndup(&buffer[index], 1);
+	}
+	// else
+	// 	print_error(syntax, Err, ft_itoa(index));
+	ft_printf("separator: %s\n", component->str);
+	ft_printf("separator_len: %i\n", component->len);
+	ft_printf("separator_pos: %i\n", component->pos);
+}
+
 static char	*ft_strdup_label(char *s1)
 {
 	char	*s2;
@@ -123,6 +139,24 @@ static void	init_direct_label_component(t_component *component, char *buffer, in
 	ft_printf("direct_label_pos: %i\n", component->pos);
 }
 
+static void	init_direct_val_component(t_component *component, char *buffer, int index)
+{
+	int		i;
+
+	i = index + 1;
+	if (buffer[index] != '%')
+		print_error(syntax, Err, ft_itoa(index));
+	while (buffer[i] && buffer[i] >= 48 && buffer[i] <= 57)
+		i++;
+	component->str = ft_strndup(&buffer[index], i - index);
+	component->pos = index;
+	component->len = i - index;
+	component->type = direct_val;
+	ft_printf("direct_label: %s\n", component->str);
+	ft_printf("direct_label_len: %i\n", component->len);
+	ft_printf("direct_label_pos: %i\n", component->pos);
+}
+
 int		main(void)
 {
 	t_component component;
@@ -130,6 +164,8 @@ int		main(void)
 	init_label_component(&component, "       label_name:", 7);
 	init_instruction_component(&component, "  lfork    ", 2);
 	init_reg_component(&component, "   r12,   ", 3);
+	init_separator_component(&component, "   ,  ", 3);
 	init_direct_label_component(&component, "   %:label,  ", 3);
+	init_direct_val_component(&component, "live: 23, ", 6);
 	return (0);
 }

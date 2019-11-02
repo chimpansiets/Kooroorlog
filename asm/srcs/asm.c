@@ -6,11 +6,13 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/15 14:12:10 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/01 10:54:42 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/02 14:29:00 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
+
+char			g_verbose = 1;
 
 int		power_rangers_assemble(char *file_name)
 {
