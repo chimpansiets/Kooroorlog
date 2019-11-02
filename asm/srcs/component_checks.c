@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/01 11:26:34 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/01 16:59:54 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/02 10:31:11 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int		is_instruction(char *buffer, int index)
 	is_instruction = 0;
 	while (i < 15)
 	{
-		if (ft_strnstr(&buffer[index], instructions[i], 5))
+		if (ft_strnequ(&buffer[index], instructions[i], ft_strlen(instructions[i])))
 			is_instruction = 1;
 		i++;
 	}

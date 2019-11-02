@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/15 14:12:56 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/01 11:29:45 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/02 09:48:42 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,25 @@
 
 typedef struct e_component	t_component;
 
+// typedef enum	e_instructions {
+// 	live, ld, st, add, sub,
+// 	and, or, xor, zjmp, ldi,
+// 	sti, fork, lld, lldi, lfork,
+// 	aff
+// }				t_instructions;
+
+static const char *instructions[] = {
+	"live", "ld", "st", "add", "sub",
+	"and", "or", "xor", "zjmp", "ldi",
+	"sti", "fork", "lld", "lldi", "lfork",
+	"aff"
+};
+
 typedef enum	e_error {
 	amount_args,
 	file_not_found,
-	lexical_error
+	lexical_error,
+	syntax
 }				t_error;
 
 typedef enum	e_severity {
@@ -51,10 +66,10 @@ typedef enum	e_token {
 }				t_token;
 
 struct			e_component {
+	char		*str;
 	t_token		type;
 	u_int32_t	pos;
 	u_int8_t	len;
-	t_component	*next;
 };
 
 typedef struct	e_file {
@@ -94,5 +109,16 @@ void			create_component(t_file *in, t_component components[2048], int *index);
 */
 
 int				is_separator(char *buffer, int index);
+int				is_direct_label(char *buffer, int index);
+int				is_label(char *buffer, int index);
+int				is_register(char *buffer, int index);
+int				is_direct(char *buffer, int index);
+int				is_instruction(char *buffer, int index);
+
+/*
+**	component_init.c
+*/
+
+void			init_component(t_token type, t_component *component, char *buffer, int index);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/01 11:04:01 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/01 17:14:55 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/02 09:28:40 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,18 @@ static int		ft_search_next_component(char *buffer, int index)
 
 void	create_component(t_file *in, t_component components[2048], int *index)
 {
-	// t_component	component;
+	t_component	component;
 	t_token		type;
 
 	(void)components;
 	if ((type = is_component(in->file_buffer, *index)) != none)
 	{
-		// init_component(type, &component, in->file_buffer, *index);
+		init_component(type, &component, in->file_buffer, *index);
 		// add_to_components(components, component);
 	}
+	(*index) += component.len;
 	// else
 	// 	print_error(lexical_error, Err, ft_itoa(*index));
 	(*index) += ft_search_next_component(in->file_buffer, *index);
+	ft_printf("%i\n", *index);
 }
