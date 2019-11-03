@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/01 11:26:34 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/02 10:31:11 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/03 13:47:44 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,28 @@ int		is_instruction(char *buffer, int index)
 		i++;
 	}
 	return (is_instruction);
+}
+
+int		is_comment(char *buffer, int index)
+{
+	if (buffer[index] == '#')
+		return (1);
+	else
+		return (0);
+}
+
+int		is_champ_name(char *buffer, int index)
+{
+	if (buffer[index] == '.' && ft_strnequ(&buffer[index + 1], "name", 4))
+		return (1);
+	else
+		return (0);
+}
+
+int		is_champ_comment(char *buffer, int index)
+{
+	if (buffer[index] == '.' && ft_strnequ(&buffer[index + 1], "comment", 7))
+		return (1);
+	else
+		return (0);
 }

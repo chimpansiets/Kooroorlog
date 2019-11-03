@@ -1,3 +1,6 @@
+.name "Our Champ!"
+.comment "OuiOui, la vache quirit"
+
 sti r1, %:live, %1
 sti r1, %:init, %1
 ld %0, r1

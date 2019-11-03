@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/01/12 13:31:18 by svoort         #+#    #+#                */
-/*   Updated: 2019/01/18 14:03:03 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/03 13:07:45 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_strtrim(char const *s)
 
 	if (s == NULL)
 		return (NULL);
-	ret = (char*)malloc(sizeof(char) * ft_strlen(s) + 1);
+	ret = (char*)ft_memalloc(sizeof(char) * ft_strlen(s) + 1);
 	if (ret == NULL)
 		return (NULL);
 	i = 0;

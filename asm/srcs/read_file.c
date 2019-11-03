@@ -6,11 +6,13 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/31 12:05:19 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/02 16:48:13 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/03 13:53:01 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
+
+extern char		print_buffer;
 
 void	read_file_content(t_file *in, char *filename)
 {
@@ -24,7 +26,8 @@ void	read_file_content(t_file *in, char *filename)
 		ft_strcat(in->file_buffer, buf);
 	}
 	// in->file_buffer[ft_strlen(in->file_buffer)] = '\0';
-	ft_printf("%s", in->file_buffer);
+	if (print_buffer)
+		ft_printf("%s", in->file_buffer);
 	in->filename = filename;
 }
 

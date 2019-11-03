@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/15 14:12:56 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/02 09:48:42 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/03 13:54:20 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 # define EXT	".cor"
 # define HEADER_SIZE (16 + PROG_NAME_LENGTH + COMMENT_LENGTH)
 # define FIX_SIZE_ERR "Program too big (Exceed CHAMP_MAX_SIZE)"
+# define DEBUG_LEVEL_NONE 0
+# define DEBUG_LEVEL_COMP 1
+# define DEBUG_LEVEL_COMP_INFO 2
 
 # include <stdio.h>
 # include <limits.h>
@@ -36,9 +39,9 @@ typedef struct e_component	t_component;
 // }				t_instructions;
 
 static const char *instructions[] = {
-	"live", "ld", "st", "add", "sub",
-	"and", "or", "xor", "zjmp", "ldi",
-	"sti", "fork", "lld", "lldi", "lfork",
+	"live", "ld", "sti", "st", "add", 
+	"sub", "and", "or", "xor", "zjmp",
+	"ldi", "fork", "lld", "lldi", "lfork",
 	"aff"
 };
 
@@ -62,7 +65,9 @@ typedef enum	e_token {
 	separator,
 	direct_label,
 	direct_val,
-	comment
+	comment,
+	champ_name,
+	champ_comment
 }				t_token;
 
 struct			e_component {
@@ -75,7 +80,7 @@ struct			e_component {
 typedef struct	e_file {
 	int			fd;
 	char		*filename;
-	char		file_buffer[BUFFER_SIZE];
+	char		*file_buffer;
 }				t_file;
 
 /*
@@ -114,6 +119,9 @@ int				is_label(char *buffer, int index);
 int				is_register(char *buffer, int index);
 int				is_direct(char *buffer, int index);
 int				is_instruction(char *buffer, int index);
+int				is_comment(char *buffer, int index);
+int				is_champ_name(char *buffer, int index);
+int				is_champ_comment(char *buffer, int index);
 
 /*
 **	component_init.c

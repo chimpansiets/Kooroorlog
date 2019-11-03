@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/01/09 10:51:29 by svoort         #+#    #+#                */
-/*   Updated: 2019/10/31 13:09:34 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/02 14:08:47 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <stdlib.h>
 # include <stdbool.h>
 # include "ft_printf.h"
+# include "get_next_line.h"
 
 # define FT_MIN(A, B) (((A) < (B)) ? (A) : (B))
 # define FT_MAX(A, B) (((A) > (B)) ? (A) : (B))
