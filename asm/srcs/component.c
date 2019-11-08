@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/01 11:04:01 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/03 13:46:34 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/06 11:07:28 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ t_token	is_component(char *buffer, int index)
 		return (direct_val);
 	else if (is_instruction(buffer, index))
 		return (instruction);
+	else if (is_indirect(buffer, index))
+		return (indirect_val);
 	else if (is_comment(buffer, index))
 		return (comment);
 	else if (is_champ_name(buffer, index))

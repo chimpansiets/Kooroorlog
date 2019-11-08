@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/15 14:35:31 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/01 14:49:27 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/06 10:50:36 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,10 @@ static void		check_errors(t_error type, char *error_str)
 		ft_printf("Lexical error at index %s\n", error_str);
 	else if (type == syntax)
 		ft_printf("Syntax error at index %s\n", error_str);
+	else if (type == name_missing)
+		ft_putstr_fd("Error: champ name missing.", 2);
+	else if (type == comment_missing)
+		ft_putstr_fd("Error: champ comment missing.", 2);
 }
 
 int				print_error(t_error type, t_severity severity, char *error_str)

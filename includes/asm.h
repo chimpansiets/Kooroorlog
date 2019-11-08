@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/15 14:12:56 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/03 13:54:20 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/06 11:07:06 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,9 @@ typedef enum	e_error {
 	amount_args,
 	file_not_found,
 	lexical_error,
-	syntax
+	syntax,
+	name_missing,
+	comment_missing
 }				t_error;
 
 typedef enum	e_severity {
@@ -65,6 +67,7 @@ typedef enum	e_token {
 	separator,
 	direct_label,
 	direct_val,
+	indirect_val,
 	comment,
 	champ_name,
 	champ_comment
@@ -81,6 +84,8 @@ typedef struct	e_file {
 	int			fd;
 	char		*filename;
 	char		*file_buffer;
+	char		has_name;
+	char		has_comment;
 }				t_file;
 
 /*
@@ -98,10 +103,10 @@ void			read_file_content(t_file *in, char *filename);
 void			check_and_read_file_content(t_file *in, char *filename);
 
 /*
-**	parser.c
+**	lexical_parser.c
 */
 
-void			parse_components(t_file *in);
+t_component		*lexical_analysis(t_file *in);
 
 /*
 **	component.c
@@ -128,5 +133,11 @@ int				is_champ_comment(char *buffer, int index);
 */
 
 void			init_component(t_token type, t_component *component, char *buffer, int index);
+
+/*
+**	syntax_analysis.c
+*/
+
+void			syntax_analysis(t_component *components);
 
 #endif

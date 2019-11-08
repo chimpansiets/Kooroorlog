@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/02 09:15:15 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/03 13:49:16 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/06 11:15:53 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,6 +184,25 @@ static void	init_direct_val_component(t_component *component, char *buffer, int 
 	}
 }
 
+static void	init_indirect_val_component(t_component *component, char *buffer, int index)
+{
+	int		i;
+
+	i = index;
+	while (buffer[i] && buffer[i] >= 48 && buffer[i] <= 57)
+		i++;
+	component->str = ft_strndup(&buffer[index], i - index);
+	component->pos = index;
+	component->len = i - index;
+	component->type = indirect_val;
+	if (g_verbose == 2)
+	{
+		ft_printf("indirect_val: %s\n", component->str);
+		ft_printf("indirect_val_len: %i\n", component->len);
+		ft_printf("indirect_val_pos: %i\n", component->pos);
+	}
+}
+
 void	init_champ_name_component(t_component *component, char *buffer, int index)
 {
 	int		i;
@@ -258,6 +277,8 @@ void	init_component(t_token type, t_component *component, char *buffer, int inde
 		init_direct_label_component(component, buffer, index);
 	else if (type == direct_val)
 		init_direct_val_component(component, buffer, index);
+	else if (type == indirect_val)
+		init_indirect_val_component(component, buffer, index);
 	else if (type == champ_name)
 		init_champ_name_component(component, buffer, index);
 	else if (type == champ_comment)

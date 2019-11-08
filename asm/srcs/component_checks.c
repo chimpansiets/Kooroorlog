@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/01 11:26:34 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/03 13:47:44 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/06 11:12:23 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,14 @@ int		is_register(char *buffer, int index)
 int		is_direct(char *buffer, int index)
 {
 	if (buffer[index] == '%')
+		return (1);
+	else
+		return (0);
+}
+
+int		is_indirect(char *buffer, int index)
+{
+	if (ft_is_int(&buffer[index]))
 		return (1);
 	else
 		return (0);

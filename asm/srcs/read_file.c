@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/31 12:05:19 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/03 13:53:01 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/08 11:28:44 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	read_file_content(t_file *in, char *filename)
 		buf[1] = '\0';
 		ft_strcat(in->file_buffer, buf);
 	}
-	// in->file_buffer[ft_strlen(in->file_buffer)] = '\0';
 	if (print_buffer)
 		ft_printf("%s", in->file_buffer);
 	in->filename = filename;
@@ -33,10 +32,22 @@ void	read_file_content(t_file *in, char *filename)
 
 void	check_and_read_file_content(t_file *in, char *filename)
 {
+	t_component	*components;
+
 	in->fd = open(filename, O_RDONLY);
 
 	if (in->fd < 0)
 		print_error(file_not_found, Err, filename);
 	read_file_content(in, filename);
-	parse_components(in);
+	components = lexical_analysis(in);
+	/*
+	**	this will check if the executable code is in correct order,
+	**	if valid arguments are given after instruction, etc.
+	*/
+	// if (in->has_name && in->has_comment)
+	// 	syntax_analysis(components);
+	if (!in->has_name)
+		print_error(name_missing, Err, NULL);
+	else
+		print_error(comment_missing, Err, NULL);
 }
