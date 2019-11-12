@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/15 14:12:56 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/06 11:07:06 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/12 16:55:11 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,13 @@
 # define DEBUG_LEVEL_NONE 0
 # define DEBUG_LEVEL_COMP 1
 # define DEBUG_LEVEL_COMP_INFO 2
+# define LABEL_CHECK (state & 1 << 6)
+# define INSTRUCTION_CHECK (state & 1 << 5)
+# define REG_CHECK (state & 1 << 4)
+# define SEPARATOR_CHECK (state & 1 << 3)
+# define DIRECT_LABEL_CHECK (state & 1 << 2)
+# define DIRECT_VAL_CHECK (state & 1 << 1)
+# define INDIRECT_VAL_CHECK (state & 1)
 
 # include <stdio.h>
 # include <limits.h>
@@ -81,6 +88,7 @@ struct			e_component {
 };
 
 typedef struct	e_file {
+	t_component	*components;
 	int			fd;
 	char		*filename;
 	char		*file_buffer;
@@ -106,7 +114,7 @@ void			check_and_read_file_content(t_file *in, char *filename);
 **	lexical_parser.c
 */
 
-t_component		*lexical_analysis(t_file *in);
+void			lexical_analysis(t_file *in);
 
 /*
 **	component.c
@@ -123,6 +131,7 @@ int				is_direct_label(char *buffer, int index);
 int				is_label(char *buffer, int index);
 int				is_register(char *buffer, int index);
 int				is_direct(char *buffer, int index);
+int				is_indirect(char *buffer, int index);
 int				is_instruction(char *buffer, int index);
 int				is_comment(char *buffer, int index);
 int				is_champ_name(char *buffer, int index);
@@ -139,5 +148,17 @@ void			init_component(t_token type, t_component *component, char *buffer, int in
 */
 
 void			syntax_analysis(t_component *components);
+
+/*
+**	init_outfile.c
+*/
+
+t_file			change_extension(t_file in);
+
+/*
+**	write_magic_to_file.c
+*/
+
+void			write_magic_to_file(t_file in, t_file out);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/02 09:42:47 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/03 13:42:22 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/12 11:01:08 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,13 +215,14 @@ int		main(void)
 {
 	t_component component;
 
-	init_label_component(&component, "       label_name:", 7);
-	init_instruction_component(&component, "  lfork    ", 2);
-	init_reg_component(&component, "   r12,   ", 3);
-	init_separator_component(&component, "   ,  ", 3);
-	init_direct_label_component(&component, "   %:label,  ", 3);
-	init_direct_val_component(&component, "live: 23, ", 6);
-	init_champ_name_component(&component, ".name \"champion_name\"", 0);
-	init_champ_comment_component(&component, ".comment \"champion_comment\"", 0);
+	ft_printf("%i\n", 64 & 1 << 6);
+	// init_label_component(&component, "       label_name:", 7);
+	// init_instruction_component(&component, "  lfork    ", 2);
+	// init_reg_component(&component, "   r12,   ", 3);
+	// init_separator_component(&component, "   ,  ", 3);
+	// init_direct_label_component(&component, "   %:label,  ", 3);
+	// init_direct_val_component(&component, "live: 23, ", 6);
+	// init_champ_name_component(&component, ".name \"champion_name\"", 0);
+	// init_champ_comment_component(&component, ".comment \"champion_comment\"", 0);
 	return (0);
 }

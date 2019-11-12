@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/01 11:04:01 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/06 11:07:28 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/12 12:30:47 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,10 @@ void	create_component(t_file *in, t_component components[2048], int *index)
 	{
 		init_component(type, &component, in->file_buffer, *index);
 		add_to_components(components, component);
-		if (type == champ_name || type == champ_comment)
-			(*index)++;
+		if (type == champ_name && (*index)++)
+			in->has_name = 1;
+		else if (type == champ_comment && (*index)++)
+			in->has_comment = 1;
 	}
 	else
 		print_error(lexical_error, Err, ft_itoa(*index));

@@ -1,33 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   syntax_analysis.c                                  :+:    :+:            */
+/*   init_outfile.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/11/05 11:36:01 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/12 12:49:43 by svoort        ########   odam.nl         */
+/*   Created: 2019/11/12 16:25:06 by svoort         #+#    #+#                */
+/*   Updated: 2019/11/12 16:37:55 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-void	syntax_analysis(t_component *components)
+t_file	change_extension(t_file in)
 {
-	int		i;
-	char	state;
+	t_file	out;
 
-	i = 0;
-	state = 127;
-	while (components[i].str != NULL)
-	{
-		if (components[i].type == instruction)
-		{
-			state = check_instruction(components[i]);
-			if (!is_valid_type(state, components[i].type))
-				print_error(syntax, Err, ft_itoa(components[i].pos));
-			change_state(&state, components[i].type);
-		}
-		i++;
-	}
+	out.filename = ft_strcdup(in.filename, '.');
+	out.filename = ft_joinfree(out.filename, ".cor", 1);
+	return (out);
 }
