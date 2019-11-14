@@ -6,14 +6,15 @@
 #    By: svoort <svoort@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/08/15 12:21:38 by svoort         #+#    #+#                 #
-#    Updated: 2019/11/12 16:36:35 by svoort        ########   odam.nl          #
+#    Updated: 2019/11/13 14:27:45 by svoort        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= asm
 
 SRC		=  asm.c error.c read_file.c lexical_parser.c component.c \
-		component_checks.c component_init.c init_outfile.c
+		component_checks.c component_init.c init_outfile.c \
+		write_magic_to_file.c
 
 OBJ		= $(addprefix srcs/,$(SRC:.c=.o))
 

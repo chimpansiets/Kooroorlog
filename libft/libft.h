@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/01/09 10:51:29 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/02 14:08:47 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/13 14:53:44 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,5 +120,7 @@ size_t				ft_strsplit_len(char **strsplit);
 bool				ft_isint(const char *str, bool strict);
 void				ft_strsplit_free(char ***strsplit);
 char				*ft_strccpy(char *dst, const char *src, char c);
+char				*ft_itoa_base(int nb, int base);
+int					ft_intlen_base(int nb, int base);
 
 #endif
