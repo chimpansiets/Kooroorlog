@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/18 11:42:24 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/18 12:49:02 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/18 14:34:08 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,12 @@ void	init_chmod_lookalike(t_component *component)
 		encoding_byte = "476";
 	else if (ft_strequ(instruction, "aff"))
 		encoding_byte = "400";
+	
+	component->encoding_byte = encoding_byte;
 }
 
 void	init_arguments(t_component *component, char *buffer, int index)
 {
 	init_chmod_lookalike(component);
+	ft_printf("chmod: %s\n", component->encoding_byte);
 }
