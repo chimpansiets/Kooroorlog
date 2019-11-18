@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/02 09:15:15 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/18 11:22:57 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/18 12:15:55 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,15 @@ static void	init_instruction_component(t_component *component, char *buffer, int
 		if (ft_strnequ(&buffer[index], instructions[i], ft_strlen(instructions[i])))
 		{
 			component->type = instruction;
-			component->str = ft_strndup(&buffer[index], ft_strlen(instructions[i]));
-			component->len = ft_strlen(instructions[i]);
+			component->str = ft_strcdup(&buffer[index], '\n');
+			if (component->str == NULL)
+			{
+				ft_printf("newline not found\n");
+				exit(1);
+			}
+			component->len = ft_strlen(component->str);
 			component->pos = index;
+			init_arguments(component, buffer, index);
 			break ;
 		}
 		i++;

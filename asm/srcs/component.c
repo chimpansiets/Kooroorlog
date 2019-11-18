@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/01 11:04:01 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/12 12:30:47 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/18 12:15:09 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,18 @@ t_token	is_component(char *buffer, int index)
 {
 	if (is_separator(buffer, index))
 		return (separator);
-	else if (is_direct_label(buffer, index))
-		return (direct_label);
+	// else if (is_direct_label(buffer, index))
+	// 	return (direct_label);
 	else if (is_label(buffer, index))
 		return (label);
-	else if (is_register(buffer, index))
-		return (reg);
-	else if (is_direct(buffer, index))
-		return (direct_val);
+	// else if (is_register(buffer, index))
+	// 	return (reg);
+	// else if (is_direct(buffer, index))
+	// 	return (direct_val);
 	else if (is_instruction(buffer, index))
 		return (instruction);
-	else if (is_indirect(buffer, index))
-		return (indirect_val);
+	// else if (is_indirect(buffer, index))
+	// 	return (indirect_val);
 	else if (is_comment(buffer, index))
 		return (comment);
 	else if (is_champ_name(buffer, index))
@@ -82,5 +82,5 @@ void	create_component(t_file *in, t_component components[2048], int *index)
 	else
 		print_error(lexical_error, Err, ft_itoa(*index));
 	(*index) += component.len;
-	// ft_printf("%i\n", *index);
+	ft_printf("%i\n", *index);
 }
