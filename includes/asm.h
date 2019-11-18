@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/15 14:12:56 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/12 16:55:11 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/18 11:23:26 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,17 @@ typedef enum	e_token {
 	champ_comment
 }				t_token;
 
+struct			e_argument {
+	t_token		type;
+	size_t		byte_size;
+}
+
 struct			e_component {
 	char		*str;
 	t_token		type;
 	u_int32_t	pos;
 	u_int8_t	len;
+	size_t		byte_size;
 };
 
 typedef struct	e_file {

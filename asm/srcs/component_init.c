@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/02 09:15:15 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/06 11:15:53 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/18 11:22:57 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -273,12 +273,12 @@ void	init_component(t_token type, t_component *component, char *buffer, int inde
 		init_reg_component(component, buffer, index);
 	else if (type == separator)
 		init_separator_component(component, buffer, index);
-	else if (type == direct_label)
-		init_direct_label_component(component, buffer, index);
-	else if (type == direct_val)
-		init_direct_val_component(component, buffer, index);
-	else if (type == indirect_val)
-		init_indirect_val_component(component, buffer, index);
+	// else if (type == direct_label)
+	// 	init_direct_label_component(component, buffer, index);
+	// else if (type == direct_val)
+	// 	init_direct_val_component(component, buffer, index);
+	// else if (type == indirect_val)
+	// 	init_indirect_val_component(component, buffer, index);
 	else if (type == champ_name)
 		init_champ_name_component(component, buffer, index);
 	else if (type == champ_comment)

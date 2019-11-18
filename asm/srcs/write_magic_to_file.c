@@ -6,13 +6,13 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/12 16:48:04 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/14 11:03:29 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/14 16:38:42 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-void	write_magic_header(int fd)
+void		write_magic_header(int fd)
 {
 	int				magic;
 	unsigned char	*addr_magic;
@@ -43,7 +43,7 @@ t_component	*find_champ_name(t_component *components)
 	return (NULL);
 }
 
-void	write_champ_name(t_file in, t_file out)
+void		write_champ_name(t_file in, t_file out)
 {
 	char		*name_of_champ;
 	t_component	*name_component;
@@ -57,14 +57,47 @@ void	write_champ_name(t_file in, t_file out)
 	write(out.fd, name_of_champ, PROG_NAME_LENGTH + extra_null_bytes);
 }
 
-void	write_champ_exec_code_size(t_file in, t_file out)
+static int	get_instruction_size(t_component *component)
 {
-	int		size;
-
-	size = count_size();
+	
 }
 
-void	write_magic_to_file(t_file in, t_file out)
+static int	count_size(t_component *components)
+{
+	int	total_size;
+	int	instr_size;
+
+	total_size = 0;
+	while (components->str != NULL)
+	{
+		if (components->type == instruction)
+		{
+			instr_size = get_instruction_size(components);
+			total_size += instr_size;
+		}
+		components++;
+	}
+	return (total_size);
+}
+
+void		write_champ_exec_code_size(t_file in, t_file out)
+{
+	int				size;
+	unsigned char	*addr_size;
+	int				i;
+
+	i = 4;
+	size = count_size(in.components);
+	ft_printf("%i\n", size);
+	addr_size = (unsigned char*)&size;
+	while (i > 0)
+	{
+		write(out.fd, &addr_size[i], 1);
+		i--;
+	}
+}
+
+void		write_magic_to_file(t_file in, t_file out)
 {
 	int			i;
 
