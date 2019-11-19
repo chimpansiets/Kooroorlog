@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/12 16:48:04 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/14 16:38:42 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/19 17:55:43 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,19 @@ void		write_champ_name(t_file in, t_file out)
 
 static int	get_instruction_size(t_component *component)
 {
-	
+	int		size;
+	int		i;
+
+	i = 0;
+	size = 1;
+	while (i < 1)
+	{
+		size += component->arguments[i].byte_size;
+		ft_printf("%i\n", component->arguments[i].byte_size);
+		i++;
+	}
+	ft_printf("instruction: %s, size: %i\n", component->str, size);
+	return (size);
 }
 
 static int	count_size(t_component *components)

@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/02 09:42:47 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/12 11:01:08 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/19 15:46:28 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,11 +211,38 @@ void	init_champ_comment_component(t_component *component, char *buffer, int inde
 	ft_printf("champ_comment_pos: %i\n", component->pos);
 }
 
+static char	*get_nth_argument(char *buf, int n)
+{
+	int		i;
+	int		ctr;
+	int		start;
+
+	i = 0;
+	ctr = 0;
+	while (buf[i] && buf[i] != '\n')
+	{
+		if (ft_isspace(buf[i]) || buf[i] == ',')
+		{
+			ctr++;
+			while (ft_isspace(buf[i]) || buf[i] == ',')
+				i++;
+		}
+		if (ctr == n)
+			break ;
+		i++;
+	}
+	start = i;
+	while (buf[i] && !ft_isspace(buf[i]) && buf[i] != ',')
+		i++;
+	return (ft_strndup(&buf[start], i - start));
+}
+
 int		main(void)
 {
 	t_component component;
 
 	ft_printf("%i\n", 64 & 1 << 6);
+	ft_printf("%s\n", get_nth_argument("sti r1, %:init, %1", 3));
 	// init_label_component(&component, "       label_name:", 7);
 	// init_instruction_component(&component, "  lfork    ", 2);
 	// init_reg_component(&component, "   r12,   ", 3);

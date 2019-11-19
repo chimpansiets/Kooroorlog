@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/02 09:15:15 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/18 12:15:55 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/19 17:47:31 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void	init_instruction_component(t_component *component, char *buffer, int
 			}
 			component->len = ft_strlen(component->str);
 			component->pos = index;
-			init_arguments(component, buffer, index);
+			init_arguments(component);
 			break ;
 		}
 		i++;
@@ -122,92 +122,25 @@ static void	init_separator_component(t_component *component, char *buffer, int i
 	}
 }
 
-static char	*ft_strdup_label(char *s1)
-{
-	char	*s2;
-	int		i;
+// static char	*ft_strdup_label(char *s1)
+// {
+// 	char	*s2;
+// 	int		i;
 
-	i = 0;
-	while (s1[i] && (ft_strchr(LABEL_CHARS, s1[i])))
-		i++;
-	s2 = (char *)ft_memalloc(i + 1);
-	if (!s1 || !(s2))
-		return (0);
-	s2[i] = '\0';
-	while (i > 0)
-	{
-		i--;
-		s2[i] = s1[i];
-	}
-	return (s2);
-}
-
-static void	init_direct_label_component(t_component *component, char *buffer, int index)
-{
-	char	*label_name;
-
-	if (buffer[index] == '%' && buffer[index + 1] == ':')
-	{
-		label_name = ft_strdup_label(&buffer[index + 2]);
-		if (ft_strlen(label_name) > 0)
-		{
-			component->type = direct_label;
-			component->str = ft_joinfree("%:", label_name, 2);
-			component->pos = index;
-			component->len = ft_strlen(component->str);
-		}
-		else
-			print_error(syntax, Err, ft_itoa(index));
-	}
-	else
-		print_error(syntax, Err, ft_itoa(index));
-	if (g_verbose == 2)
-	{
-		ft_printf("direct_label: %s\n", component->str);
-		ft_printf("direct_label_len: %i\n", component->len);
-		ft_printf("direct_label_pos: %i\n", component->pos);
-	}
-}
-
-static void	init_direct_val_component(t_component *component, char *buffer, int index)
-{
-	int		i;
-
-	i = index + 1;
-	if (buffer[index] != '%')
-		print_error(syntax, Err, ft_itoa(index));
-	while (buffer[i] && buffer[i] >= 48 && buffer[i] <= 57)
-		i++;
-	component->str = ft_strndup(&buffer[index], i - index);
-	component->pos = index;
-	component->len = i - index;
-	component->type = direct_val;
-	if (g_verbose == 2)
-	{
-		ft_printf("direct_val: %s\n", component->str);
-		ft_printf("direct_val_len: %i\n", component->len);
-		ft_printf("direct_val_pos: %i\n", component->pos);
-	}
-}
-
-static void	init_indirect_val_component(t_component *component, char *buffer, int index)
-{
-	int		i;
-
-	i = index;
-	while (buffer[i] && buffer[i] >= 48 && buffer[i] <= 57)
-		i++;
-	component->str = ft_strndup(&buffer[index], i - index);
-	component->pos = index;
-	component->len = i - index;
-	component->type = indirect_val;
-	if (g_verbose == 2)
-	{
-		ft_printf("indirect_val: %s\n", component->str);
-		ft_printf("indirect_val_len: %i\n", component->len);
-		ft_printf("indirect_val_pos: %i\n", component->pos);
-	}
-}
+// 	i = 0;
+// 	while (s1[i] && (ft_strchr(LABEL_CHARS, s1[i])))
+// 		i++;
+// 	s2 = (char *)ft_memalloc(i + 1);
+// 	if (!s1 || !(s2))
+// 		return (0);
+// 	s2[i] = '\0';
+// 	while (i > 0)
+// 	{
+// 		i--;
+// 		s2[i] = s1[i];
+// 	}
+// 	return (s2);
+// }
 
 void	init_champ_name_component(t_component *component, char *buffer, int index)
 {
@@ -279,12 +212,6 @@ void	init_component(t_token type, t_component *component, char *buffer, int inde
 		init_reg_component(component, buffer, index);
 	else if (type == separator)
 		init_separator_component(component, buffer, index);
-	// else if (type == direct_label)
-	// 	init_direct_label_component(component, buffer, index);
-	// else if (type == direct_val)
-	// 	init_direct_val_component(component, buffer, index);
-	// else if (type == indirect_val)
-	// 	init_indirect_val_component(component, buffer, index);
 	else if (type == champ_name)
 		init_champ_name_component(component, buffer, index);
 	else if (type == champ_comment)
