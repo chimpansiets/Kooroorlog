@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/18 11:42:24 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/20 13:14:06 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/20 14:48:58 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int			get_label_size(char *buf)
 	i = 0;
 	while (i < 6)
 	{
-		if (ft_strnequ(buf, instructions[i], ft_strlen(instructions_label_2[i])))
+		if (ft_strnequ(buf, instructions_label_2[i], ft_strlen(instructions_label_2[i])))
 			return (2);
 		i++;
 	}

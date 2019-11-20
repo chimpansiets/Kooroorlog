@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/12 16:48:04 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/20 13:29:11 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/20 15:27:03 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ t_component	*find_champ_name(t_component *components)
 	while (name_of_champ->str != NULL)
 	{
 		if (name_of_champ->type == champ_name)
+		{
+			ft_printf("%s\n", name_of_champ->str);
 			return (name_of_champ);
+		}
 		name_of_champ++;
 	}
 	return (NULL);
@@ -116,6 +119,6 @@ void		write_magic_to_file(t_file in, t_file out)
 	// 	write(out.fd, 0, 1);
 	write_champ_exec_code_size(in, out);
 	write_champ_comment(in, out);
-	// write_champ_exec_code(in, out);
+	write_champ_exec_code(in, out);
 	(void)in;
 }
