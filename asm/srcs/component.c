@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/01 11:04:01 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/19 17:45:25 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/20 12:56:21 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,12 @@ static void		add_to_components(t_component components[2048], t_component compone
 	new.str = component.str;
 	new.pos = component.pos;
 	new.len = component.len;
+	new.arguments[0] = component.arguments[0];
+	new.arguments[1] = component.arguments[1];
+	new.arguments[2] = component.arguments[2];
+	new.label_size = component.label_size;
+	new.encoding_byte = component.encoding_byte;
+	new.byte_size = component.byte_size;
 	components[curr_index] = new;
 	curr_index++;
 }
@@ -74,5 +80,4 @@ void	create_component(t_file *in, t_component components[2048], int *index)
 	else
 		print_error(lexical_error, Err, ft_itoa(*index));
 	(*index) += component.len;
-	ft_printf("%i\n", *index);
 }

@@ -6,24 +6,22 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/12 16:48:04 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/19 17:55:43 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/20 13:06:51 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-void		write_magic_header(int fd)
+void		write_reverse_int(int fd, int value)
 {
-	int				magic;
-	unsigned char	*addr_magic;
+	unsigned char	*addr_value;
 	int				i;
 
-	i = 4;
-	magic = COREWAR_EXEC_MAGIC;
-	addr_magic = (unsigned char*)&magic;
-	while (i > 0)
+	i = 3;
+	addr_value = (unsigned char*)&value;
+	while (i > -1)
 	{
-		write(fd, &addr_magic[i], 1);
+		write(fd, &addr_value[i], 1);
 		i--;
 	}
 }
@@ -57,36 +55,15 @@ void		write_champ_name(t_file in, t_file out)
 	write(out.fd, name_of_champ, PROG_NAME_LENGTH + extra_null_bytes);
 }
 
-static int	get_instruction_size(t_component *component)
-{
-	int		size;
-	int		i;
-
-	i = 0;
-	size = 1;
-	while (i < 1)
-	{
-		size += component->arguments[i].byte_size;
-		ft_printf("%i\n", component->arguments[i].byte_size);
-		i++;
-	}
-	ft_printf("instruction: %s, size: %i\n", component->str, size);
-	return (size);
-}
-
 static int	count_size(t_component *components)
 {
 	int	total_size;
-	int	instr_size;
 
 	total_size = 0;
 	while (components->str != NULL)
 	{
 		if (components->type == instruction)
-		{
-			instr_size = get_instruction_size(components);
-			total_size += instr_size;
-		}
+			total_size += components->byte_size;
 		components++;
 	}
 	return (total_size);
@@ -95,18 +72,9 @@ static int	count_size(t_component *components)
 void		write_champ_exec_code_size(t_file in, t_file out)
 {
 	int				size;
-	unsigned char	*addr_size;
-	int				i;
 
-	i = 4;
 	size = count_size(in.components);
-	ft_printf("%i\n", size);
-	addr_size = (unsigned char*)&size;
-	while (i > 0)
-	{
-		write(out.fd, &addr_size[i], 1);
-		i--;
-	}
+	write_reverse_int(out.fd, size);
 }
 
 void		write_magic_to_file(t_file in, t_file out)
@@ -114,7 +82,7 @@ void		write_magic_to_file(t_file in, t_file out)
 	int			i;
 
 	i = 0;
-	write_magic_header(out.fd);
+	write_reverse_int(out.fd, COREWAR_EXEC_MAGIC);
 	write_champ_name(in, out);
 	// while (i++ < 4)
 	// 	write(out.fd, 0, 1);

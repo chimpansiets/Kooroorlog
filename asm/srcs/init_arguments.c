@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/18 11:42:24 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/19 17:51:26 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/20 13:14:06 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,12 +110,11 @@ int			get_label_size(char *buf)
 	return (4);
 }
 
+// Still need to check which argument are allowed with encoding byte, not just if '0'.
 void		init_arguments(t_component *component)
 {
-	int		label_size;
-
-	label_size = get_label_size(component->str);
-	component->label_size = label_size;
+	ft_bzero(component->arguments, sizeof(t_argument) * 3);
+	component->label_size = get_label_size(component->str);
 	init_chmod_lookalike(component);
 	if (component->encoding_byte[0] != '0')
 		component->arguments[0] = check_and_init_arg(component, 1);
@@ -123,4 +122,7 @@ void		init_arguments(t_component *component)
 		component->arguments[1] = check_and_init_arg(component, 2);
 	if (component->encoding_byte[2] != '0')
 		component->arguments[2] = check_and_init_arg(component, 3);
+	component->byte_size = 1 + component->arguments[0].byte_size + component->arguments[1].byte_size + component->arguments[2].byte_size;
+	if (!ft_strequ(component->encoding_byte, "200"))
+		component->byte_size++;
 }
