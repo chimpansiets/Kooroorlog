@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/15 14:12:56 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/19 17:40:08 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/20 13:49:07 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,11 @@
 # define EXT	".cor"
 # define HEADER_SIZE (16 + PROG_NAME_LENGTH + COMMENT_LENGTH)
 # define FIX_SIZE_ERR "Program too big (Exceed CHAMP_MAX_SIZE)"
+
 # define DEBUG_LEVEL_NONE 0
 # define DEBUG_LEVEL_COMP 1
 # define DEBUG_LEVEL_COMP_INFO 2
+
 # define LABEL_CHECK (state & 1 << 6)
 # define INSTRUCTION_CHECK (state & 1 << 5)
 # define REG_CHECK (state & 1 << 4)
@@ -28,6 +30,10 @@
 # define DIRECT_LABEL_CHECK (state & 1 << 2)
 # define DIRECT_VAL_CHECK (state & 1 << 1)
 # define INDIRECT_VAL_CHECK (state & 1)
+
+# define ENCODING_REG(x) (x & 2 && !(x & 1))
+# define ENCODING_DIRECT(x) (!(x & 2) && x & 1)
+# define ENCODING_INDIRECT(x) (x & 2 && x & 1)
 
 # include <stdio.h>
 # include <limits.h>

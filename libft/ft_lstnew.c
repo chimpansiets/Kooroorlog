@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/01/18 10:29:49 by svoort         #+#    #+#                */
-/*   Updated: 2019/01/18 17:08:37 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/20 13:34:15 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_list	*ft_lstnew(void const *content, size_t content_size)
 {
 	t_list	*new;
 
-	new = (t_list*)malloc(sizeof(t_list));
+	new = (t_list*)ft_memalloc(sizeof(t_list));
 	if (new == NULL)
 		return (NULL);
 	if (content == NULL)
