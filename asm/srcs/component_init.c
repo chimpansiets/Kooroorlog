@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/02 09:15:15 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/19 17:47:31 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/20 13:34:33 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ extern int	g_verbose;
 
 static char	is_labelchar(char c)
 {
-	if (strchr(LABEL_CHARS, c) != NULL || c == LABEL_CHAR)
+	if (ft_strchr(LABEL_CHARS, c) != NULL || c == LABEL_CHAR)
 		return (1);
 	else
 		return (0);

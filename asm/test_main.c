@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/02 09:42:47 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/20 12:40:48 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/20 13:46:46 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static char	is_labelchar(char c)
 {
-	if (strchr(LABEL_CHARS, c) != NULL)
+	if (ft_strchr(LABEL_CHARS, c) != NULL)
 		return (1);
 	else
 		return (0);
