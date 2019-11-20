@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/20 14:38:46 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/20 18:07:45 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/20 18:20:19 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,30 @@ unsigned char	get_registry_number(char *buf)
 	nb = ft_atoi(&buf[1]);
 	return ((char)nb);
 }
+// needs fix
+int				calculate_distance_to_label(t_argument argument, t_component *curr_component, t_component *all_components)
+{
+	int		index;
+	int		label_index;
+	int		distance;
 
-void			write_argument(int fd, t_argument argument)
+	index = 0;
+	while (all_components[index].str != NULL)
+	{
+		if (all_components[index].type == label)
+		{
+			if (ft_strequ(all_components[index].str, &argument.str[2])
+				label_index = index;
+			if (ft_strequ(all_components[index].str, curr_component))
+		}
+		index++;
+	}
+}
+
+void			write_argument(int fd, t_argument argument, t_component *curr_component, t_component *all_components)
 {
 	unsigned char	c;
+	int				distance;
 
 	if (argument.type == reg)
 	{
@@ -76,10 +96,19 @@ void			write_argument(int fd, t_argument argument)
 		else
 			write_reverse_2bytes(fd, (uint16_t)ft_atoi(&argument.str[1]));
 	}
-	else if ()
+	else if (argument.type == direct_label)
+	{
+		distance = calculate_distance_to_label(argument, curr_component, all_components);
+		if (argument.byte_size == 4)
+			write_reverse_int(fd, distance);
+		else
+			write_reverse_2bytes(fd, (uint16_t)distance);
+	}
+	else if (argument.type == indirect_val)
+		write_reverse_int(fd, ft_atoi(argument.str));
 }
 
-void			write_instruction(int fd, t_component *component)
+void			write_instruction(int fd, t_component *component, t_component *all_components)
 {
 	int		i;
 	int		instruction_index;
@@ -96,7 +125,7 @@ void			write_instruction(int fd, t_component *component)
 	i = 0;
 	while (i < 3)
 	{
-		write_argument(fd, component->arguments[i]);
+		write_argument(fd, component->arguments[i], component, all_components);
 		i++;
 	}
 }
@@ -109,7 +138,7 @@ void			write_champ_exec_code(t_file in, t_file out)
 	while (component->str != NULL)
 	{
 		if (component->type == instruction)
-			write_instruction(out.fd, component);
+			write_instruction(out.fd, component, in.components);
 		component++;
 	}
 }
