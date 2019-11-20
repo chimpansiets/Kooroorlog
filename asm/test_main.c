@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/02 09:42:47 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/20 13:46:46 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/20 17:12:43 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,8 +241,9 @@ int		main(void)
 {
 	t_component component;
 
-	ft_printf("%i\n", 64 & 1 << 6);
-	ft_printf("%s\n", get_nth_argument("sti r1, %:live, %1,", 1));
+	ft_printf("%hu", (uint16_t)23);
+	// ft_printf("%i\n", 64 & 1 << 6);
+	// ft_printf("%s\n", get_nth_argument("sti r1, %:live, %1,", 1));
 	// init_label_component(&component, "       label_name:", 7);
 	// init_instruction_component(&component, "  lfork    ", 2);
 	// init_reg_component(&component, "   r12,   ", 3);

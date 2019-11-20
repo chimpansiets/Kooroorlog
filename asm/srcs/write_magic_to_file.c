@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/12 16:48:04 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/20 15:27:03 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/20 17:13:27 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,20 @@ void		write_reverse_int(int fd, int value)
 	int				i;
 
 	i = 3;
+	addr_value = (unsigned char*)&value;
+	while (i > -1)
+	{
+		write(fd, &addr_value[i], 1);
+		i--;
+	}
+}
+
+void		write_reverse_2bytes(int fd, u_int16_t value)
+{
+	unsigned char	*addr_value;
+	int				i;
+
+	i = 1;
 	addr_value = (unsigned char*)&value;
 	while (i > -1)
 	{

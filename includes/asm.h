@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/15 14:12:56 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/20 15:05:38 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/20 17:13:44 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,7 @@ t_file			change_extension(t_file in);
 */
 
 void			write_reverse_int(int fd, int value);
+void			write_reverse_2bytes(int fd, u_int16_t value);
 void			write_magic_to_file(t_file in, t_file out);
 
 /*

@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/20 14:38:46 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/20 15:40:19 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/20 18:07:45 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,36 @@ unsigned char	get_codage_octal(t_argument *arguments)
 	return (codage_octal);
 }
 
+unsigned char	get_registry_number(char *buf)
+{
+	int		nb;
+
+	nb = ft_atoi(&buf[1]);
+	return ((char)nb);
+}
+
+void			write_argument(int fd, t_argument argument)
+{
+	unsigned char	c;
+
+	if (argument.type == reg)
+	{
+		c = get_registry_number(argument.str);
+		write(fd, &c, 1);
+	}
+	else if (argument.type == direct_val)
+	{
+		if (argument.byte_size == 4)
+			write_reverse_int(fd, ft_atoi(&argument.str[1]));
+		else
+			write_reverse_2bytes(fd, (uint16_t)ft_atoi(&argument.str[1]));
+	}
+	else if ()
+}
+
 void			write_instruction(int fd, t_component *component)
 {
+	int		i;
 	int		instruction_index;
 
 	instruction_index = get_instruction_index(component->str);
@@ -61,8 +89,16 @@ void			write_instruction(int fd, t_component *component)
 		print_error(instr_not_found, Err, NULL);
 	write(fd, &instruction_opcodes[instruction_index], 1);
 	if (!ft_strequ(component->encoding_byte, "200"))
+	{
 		component->codage_octal = get_codage_octal(component->arguments);
-	write(fd, &(component->codage_octal), 1);
+		write(fd, &(component->codage_octal), 1);
+	}
+	i = 0;
+	while (i < 3)
+	{
+		write_argument(fd, component->arguments[i]);
+		i++;
+	}
 }
 
 void			write_champ_exec_code(t_file in, t_file out)
