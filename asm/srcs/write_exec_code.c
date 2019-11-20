@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/20 14:38:46 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/20 15:29:45 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/20 15:40:19 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,6 @@ unsigned char	get_codage_octal(t_argument *arguments)
 	return (codage_octal);
 }
 
-#define BYTE_TO_BINARY_PATTERN "%c%c%c%c%c%c%c%c\n"
-#define BYTE_TO_BINARY(byte)  \
-  (byte & 0x80 ? '1' : '0'), \
-  (byte & 0x40 ? '1' : '0'), \
-  (byte & 0x20 ? '1' : '0'), \
-  (byte & 0x10 ? '1' : '0'), \
-  (byte & 0x08 ? '1' : '0'), \
-  (byte & 0x04 ? '1' : '0'), \
-  (byte & 0x02 ? '1' : '0'), \
-  (byte & 0x01 ? '1' : '0') 
-
 void			write_instruction(int fd, t_component *component)
 {
 	int		instruction_index;
@@ -71,8 +60,9 @@ void			write_instruction(int fd, t_component *component)
 	if (instruction_index == -1)
 		print_error(instr_not_found, Err, NULL);
 	write(fd, &instruction_opcodes[instruction_index], 1);
-	component->codage_octal = get_codage_octal(component->arguments);
-	ft_printf(BYTE_TO_BINARY_PATTERN, BYTE_TO_BINARY(component->codage_octal));
+	if (!ft_strequ(component->encoding_byte, "200"))
+		component->codage_octal = get_codage_octal(component->arguments);
+	write(fd, &(component->codage_octal), 1);
 }
 
 void			write_champ_exec_code(t_file in, t_file out)

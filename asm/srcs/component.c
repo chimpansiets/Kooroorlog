@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/01 11:04:01 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/20 12:56:21 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/20 15:37:38 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ static void		add_to_components(t_component components[2048], t_component compone
 	new.label_size = component.label_size;
 	new.encoding_byte = component.encoding_byte;
 	new.byte_size = component.byte_size;
+	new.codage_octal = 0;
 	components[curr_index] = new;
 	curr_index++;
 }
