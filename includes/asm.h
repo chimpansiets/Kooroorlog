@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/15 14:12:56 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/20 13:49:07 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/20 15:05:38 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,19 @@ typedef struct e_component	t_component;
 // 	aff
 // }				t_instructions;
 
-static const char *instructions[] = {
+static const char	*instructions[] = {
 	"live", "ldi", "sti", "st", "add", 
 	"sub", "and", "or", "xor", "zjmp",
 	"ld", "fork", "lldi", "lld", "lfork",
 	"aff"
 };
 
-static const char *instructions_label_2[] = {
+static const int	instruction_opcodes[] = {
+	1, 10, 11, 3, 4, 5, 6, 7, 8, 9, 2,
+	12, 14, 13, 15, 16
+};
+
+static const char	*instructions_label_2[] = {
 	"zjmp", "ldi", "sti", "fork", "lldi",
 	"lfork"
 };
@@ -69,7 +74,8 @@ typedef enum	e_error {
 	lexical_error,
 	syntax,
 	name_missing,
-	comment_missing
+	comment_missing,
+	instr_not_found
 }				t_error;
 
 typedef enum	e_severity {
@@ -98,14 +104,15 @@ typedef struct	e_argument {
 }				t_argument;
 
 struct			e_component {
-	char		*str;
-	char		*encoding_byte;
-	t_token		type;
-	u_int32_t	pos;
-	u_int8_t	len;
-	t_argument 	arguments[3];
-	size_t		byte_size;
-	size_t		label_size;
+	char			*str;
+	char			*encoding_byte;
+	unsigned char	codage_octal;
+	t_token			type;
+	u_int32_t		pos;
+	u_int8_t		len;
+	t_argument 		arguments[3];
+	size_t			byte_size;
+	size_t			label_size;
 };
 
 typedef struct	e_file {
@@ -180,6 +187,7 @@ t_file			change_extension(t_file in);
 **	write_magic_to_file.c
 */
 
+void			write_reverse_int(int fd, int value);
 void			write_magic_to_file(t_file in, t_file out);
 
 /*
@@ -187,5 +195,11 @@ void			write_magic_to_file(t_file in, t_file out);
 */
 
 void			init_arguments(t_component *component);
+
+/*
+**	write_exec_code.c
+*/
+
+void			write_champ_exec_code(t_file in, t_file out);
 
 #endif
