@@ -6,13 +6,13 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/15 14:12:10 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/18 12:39:35 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/21 12:27:04 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-char			g_verbose = DEBUG_LEVEL_NONE;
+char			g_verbose = DEBUG_LEVEL_COMP;
 char			print_buffer = DEBUG_LEVEL_NONE;
 
 int		its_morphin_time(char *file_name)

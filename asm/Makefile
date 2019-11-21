@@ -6,7 +6,7 @@
 #    By: svoort <svoort@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/08/15 12:21:38 by svoort         #+#    #+#                 #
-#    Updated: 2019/11/20 14:57:15 by svoort        ########   odam.nl          #
+#    Updated: 2019/11/21 12:11:01 by svoort        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,9 @@ OBJ		= $(addprefix srcs/,$(SRC:.c=.o))
 
 INCLUDES = ../includes/asm.h ../includes/op.h ../includes/vm.h
 
-ALL_FLAGS = -g -Wall -Wextra -Werror
+ALL_FLAGS = -g
+
+#-Wall -Wextra -Werror
 
 CFLAGS	=  $(ALL_FLAGS) -I../includes/ -I../libft/
 

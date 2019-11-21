@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/18 11:42:24 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/20 14:48:58 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/21 13:11:33 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,10 @@ t_token		get_type_argument(char *argument_str)
 {
 	if (is_register(argument_str, 0))
 		return (reg);
-	else if (is_direct(argument_str, 0))
-		return (direct_val);
 	else if (is_direct_label(argument_str, 0))
 		return (direct_label);
+	else if (is_direct(argument_str, 0))
+		return (direct_val);
 	else
 		return (indirect_val);
 }

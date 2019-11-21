@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/15 14:12:56 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/20 17:13:44 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/21 15:09:03 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@
 
 # define DEBUG_LEVEL_NONE 0
 # define DEBUG_LEVEL_COMP 1
-# define DEBUG_LEVEL_COMP_INFO 2
+# define DEBUG_LEVEL_COMP_ARGS 2
+# define DEBUG_LEVEL_COMP_INFO 3
 
 # define LABEL_CHECK (state & 1 << 6)
 # define INSTRUCTION_CHECK (state & 1 << 5)

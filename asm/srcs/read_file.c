@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/31 12:05:19 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/12 16:28:23 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/21 12:12:04 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,10 @@ void	check_and_read_file_content(t_file *in, char *filename)
 	*/
 	// syntax_analysis(in->components);
 	if (!in->has_name)
+	{
+		ft_printf("hoi1\n");
 		print_error(name_missing, Err, NULL);
+	}
 	else if (!in->has_comment)
 		print_error(comment_missing, Err, NULL);
 }
