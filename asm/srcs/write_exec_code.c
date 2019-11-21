@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/20 14:38:46 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/21 15:38:57 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/21 16:27:46 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,12 +169,19 @@ void			write_instruction(int fd, t_component *component, t_component *all_compon
 void			write_champ_exec_code(t_file in, t_file out)
 {
 	t_component	*component;
+	int			ctr;
 
+	ctr = 0;
 	component = in.components;
 	while (component->str != NULL)
 	{
 		if (component->type == instruction)
+		{
 			write_instruction(out.fd, component, in.components);
+			ctr++;
+			if (ctr == 2)
+				exit(1);
+		}
 		component++;
 	}
 }
