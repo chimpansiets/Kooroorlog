@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/01/09 10:51:29 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/13 14:53:44 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/27 16:22:14 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,5 +122,6 @@ void				ft_strsplit_free(char ***strsplit);
 char				*ft_strccpy(char *dst, const char *src, char c);
 char				*ft_itoa_base(int nb, int base);
 int					ft_intlen_base(int nb, int base);
+int					ft_atoi_b(const char *str);
 
 #endif

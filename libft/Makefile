@@ -6,7 +6,7 @@
 #    By: svoort <svoort@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/04/24 16:34:33 by svoort         #+#    #+#                 #
-#    Updated: 2019/11/13 14:53:52 by svoort        ########   odam.nl          #
+#    Updated: 2019/11/27 16:22:50 by svoort        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,8 @@ SRCS =	ft_atoi.c ft_bzero.c ft_countwords.c ft_isalnum.c ft_isalpha.c \
 		helper1.c helper2.c helper3.c helper4.c helper5.c helper6.c \
 		helper7.c ft_is_int.c ft_isspace.c get_next_line.c \
 		ft_strcdup.c ft_strnchr.c ft_strsplit_free.c ft_strsplit_len.c \
-		ft_isint.c ft_strccpy.c ft_itoa_base.c ft_intlen_base.c
+		ft_isint.c ft_strccpy.c ft_itoa_base.c ft_intlen_base.c \
+		ft_atoi_b.c
 INCLUDES = -I .
 NAME = libft.a
 OBJ = $(SRCS:.c=.o)
