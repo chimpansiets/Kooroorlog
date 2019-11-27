@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/31 12:05:19 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/21 12:12:04 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/27 15:17:14 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	read_file_content(t_file *in, char *filename)
 	int		ret;
 	char	buf[2];
 
-	in->file_buffer = ft_memalloc(sizeof(char) * 4096);
+	in->file_buffer = ft_memalloc(sizeof(char) * 4096);//checken of het meer kan zijn
 	while ((ret = read(in->fd, buf, 1)) > 0)
 	{
 		buf[1] = '\0';

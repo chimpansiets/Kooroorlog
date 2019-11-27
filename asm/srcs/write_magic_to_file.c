@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/12 16:48:04 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/21 12:12:27 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/27 16:06:26 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void		write_reverse_int(int fd, int value)
 	}
 }
 
-void		write_reverse_2bytes(int fd, u_int16_t value)
+void		write_reverse_2bytes(int fd, short value)
 {
 	unsigned char	*addr_value;
 	int				i;

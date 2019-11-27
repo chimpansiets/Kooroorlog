@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/01 09:26:16 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/21 15:10:08 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/27 16:10:37 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void		lexical_analysis(t_file *in)
 	ft_bzero(components, sizeof(t_component) * 2048);
 	while (in->file_buffer[index] != '\0')
 		create_component(in, components, &index);
-	if (g_verbose == 1)
+	if (g_verbose == DEBUG_LEVEL_COMP || g_verbose == DEBUG_LEVEL_COMP_ARGS)
 		print_components(components);
 	in->components = components;
 }

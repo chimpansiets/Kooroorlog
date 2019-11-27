@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/02 09:42:47 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/20 17:12:43 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/27 16:06:55 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,11 +237,43 @@ static char	*get_nth_argument(char *buf, int n)
 	return (ft_strndup(&buf[start], i - start));
 }
 
+void		write_reverse_int(int fd, int value)
+{
+	unsigned char	*addr_value;
+	int				i;
+
+	i = 3;
+	addr_value = (unsigned char*)&value;
+	while (i > -1)
+	{
+		write(fd, &addr_value[i], 1);
+		i--;
+	}
+}
+
+void		write_reverse_2bytes(int fd, short value)
+{
+	unsigned char	*addr_value;
+	int				i;
+
+	i = 1;
+	if (value < 0)
+		ft_printf("lol: %x\n", value);
+	addr_value = (unsigned char*)&value;
+	while (i > -1)
+	{
+		write(fd, &addr_value[i], 1);
+		i--;
+	}
+}
+
 int		main(void)
 {
 	t_component component;
 
-	ft_printf("%hu", (uint16_t)23);
+	int	fd = open("test_hexdump", O_TRUNC | O_CREAT | O_WRONLY, 0644);
+	
+	write_reverse_2bytes(fd, -200);
 	// ft_printf("%i\n", 64 & 1 << 6);
 	// ft_printf("%s\n", get_nth_argument("sti r1, %:live, %1,", 1));
 	// init_label_component(&component, "       label_name:", 7);
