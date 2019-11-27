@@ -65,4 +65,4 @@ There are many options, including (again, read corewar.pdf for more info):
 
 ## License
 
-MIT License.
+MIT License. jk, I actually have no idea what license.
