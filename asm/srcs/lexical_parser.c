@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/01 09:26:16 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/27 16:10:37 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/28 14:03:29 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ static void	print_components(t_component components[2048])
 		if (components[i].type == instruction && g_verbose == DEBUG_LEVEL_COMP_ARGS)
 		{
 			ft_printf("arg1: %s\n", components[i].arguments[0].str);
-				ft_printf("type: %s\n", get_arg_type(components[i].arguments[0].type));
+			ft_printf("type: %s\n", get_arg_type(components[i].arguments[0].type));
 			ft_printf("arg2: %s\n", components[i].arguments[1].str);
 			ft_printf("type: %s\n", get_arg_type(components[i].arguments[1].type));
-				ft_printf("arg3: %s\n", components[i].arguments[2].str);
+			ft_printf("arg3: %s\n", components[i].arguments[2].str);
 			ft_printf("type: %s\n", get_arg_type(components[i].arguments[2].type));
 		}
 		i++;

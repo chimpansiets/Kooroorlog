@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/20 14:38:46 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/27 16:28:57 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/28 13:08:01 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ unsigned char	get_registry_number(char *buf)
 	return ((char)nb);
 }
 
-// needs fix
-int				calculate_distance_to_label(t_argument argument, t_component *curr_component, t_component *all_components)
+// if there are duplicate instructions, it wont know the difference of which one to find.
+int				calculate_distance_to_label(t_argument argument, t_component *curr_component, t_component *all_components, int instr_index)
 {
 	int		index;
 	int		label_index;
@@ -87,7 +87,7 @@ int				calculate_distance_to_label(t_argument argument, t_component *curr_compon
 		}
 		else if (all_components[index].type == instruction)
 		{
-			if (ft_strequ(all_components[index].str, curr_component->str))
+			if (instr_index == index)
 			{
 				instruction_index = index;
 				if (one_found == 0)
@@ -102,10 +102,12 @@ int				calculate_distance_to_label(t_argument argument, t_component *curr_compon
 			distance += all_components[index].byte_size;
 		index++;
 	}
+	if (ft_strequ(argument.str, "%:label"))
+		ft_printf("distance: %i\n", distance);
 	return (distance);
 }
 
-void			write_argument(int fd, t_argument argument, t_component *curr_component, t_component *all_components)
+void			write_argument(int fd, t_argument argument, t_component *curr_component, t_component *all_components, int index)
 {
 	unsigned char	c;
 	int				distance;
@@ -124,7 +126,7 @@ void			write_argument(int fd, t_argument argument, t_component *curr_component, 
 	}
 	else if (argument.type == direct_label)
 	{
-		distance = calculate_distance_to_label(argument, curr_component, all_components);
+		distance = calculate_distance_to_label(argument, curr_component, all_components, index);
 		if (argument.byte_size == 4)
 			write_reverse_int(fd, distance);
 		else
@@ -134,7 +136,7 @@ void			write_argument(int fd, t_argument argument, t_component *curr_component, 
 		write_reverse_int(fd, ft_atoi(argument.str));
 }
 
-void			write_instruction(int fd, t_component *component, t_component *all_components)
+void			write_instruction(int fd, t_component *component, t_component *all_components, int index)
 {
 	int		i;
 	int		instruction_index;
@@ -151,7 +153,7 @@ void			write_instruction(int fd, t_component *component, t_component *all_compon
 	i = 0;
 	while (i < 3)
 	{
-		write_argument(fd, component->arguments[i], component, all_components);
+		write_argument(fd, component->arguments[i], component, all_components, index);
 		i++;
 	}
 }
@@ -159,14 +161,15 @@ void			write_instruction(int fd, t_component *component, t_component *all_compon
 void			write_champ_exec_code(t_file in, t_file out)
 {
 	t_component	*component;
-	int			ctr;
+	int			index;
 
-	ctr = 0;
+	index = 0;
 	component = in.components;
 	while (component->str != NULL)
 	{
 		if (component->type == instruction)
-			write_instruction(out.fd, component, in.components);
+			write_instruction(out.fd, component, in.components, index);
 		component++;
+		index++;
 	}
 }

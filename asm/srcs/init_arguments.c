@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/18 11:42:24 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/21 17:10:48 by svoort        ########   odam.nl         */
+/*   Updated: 2019/11/28 14:24:31 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,23 @@ void	init_chmod_lookalike(t_component *component)
 	char	*instruction;
 	char	*encoding_byte;
 
-	instruction = ft_strcdup(component->str, ' ');
-	if (ft_strequ(instruction, "live") || ft_strequ(instruction, "zjmp") || \
-	ft_strequ(instruction, "fork") || ft_strequ(instruction, "lfork"))
+	instruction = ft_strtrim(component->str);
+	ft_printf("chmod: %s\n", instruction);
+	if (ft_strnequ(instruction, "live", 4) || ft_strnequ(instruction, "zjmp", 4) || \
+	ft_strnequ(instruction, "fork", 4) || ft_strnequ(instruction, "lfork", 5))
 		encoding_byte = "200";
-	else if (ft_strequ(instruction, "ld") || ft_strequ(instruction, "lld"))
+	else if (ft_strnequ(instruction, "ld", 2) || ft_strnequ(instruction, "lld", 3))
 		encoding_byte = "340";
-	else if (ft_strequ(instruction, "st"))
+	else if (ft_strnequ(instruction, "st", 2))
 		encoding_byte = "450";
-	else if (ft_strequ(instruction, "add") || ft_strequ(instruction, "sub"))
+	else if (ft_strnequ(instruction, "add", 3) || ft_strnequ(instruction, "sub", 3))
 		encoding_byte = "444";
-	else if (ft_strequ(instruction, "and") || ft_strequ(instruction, "or") || \
-		ft_strequ(instruction, "xor"))
+	else if (ft_strnequ(instruction, "and", 3) || ft_strnequ(instruction, "or", 2) || \
+		ft_strnequ(instruction, "xor", 3))
 		encoding_byte = "774";
-	else if (ft_strequ(instruction, "ldi") || ft_strequ(instruction, "lldi"))
+	else if (ft_strnequ(instruction, "ldi", 3) || ft_strnequ(instruction, "lldi", 4))
 		encoding_byte = "764";
-	else if (ft_strequ(instruction, "sti"))
+	else if (ft_strnequ(instruction, "sti", 3))
 		encoding_byte = "476";
 	else
 		encoding_byte = "400";
