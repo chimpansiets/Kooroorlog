@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/18 11:42:24 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/28 14:24:31 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/02 15:11:29 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,17 @@ void	init_chmod_lookalike(t_component *component)
 	char	*instruction;
 	char	*encoding_byte;
 
+	encoding_byte = NULL;
 	instruction = ft_strtrim(component->str);
-	ft_printf("chmod: %s\n", instruction);
 	if (ft_strnequ(instruction, "live", 4) || ft_strnequ(instruction, "zjmp", 4) || \
 	ft_strnequ(instruction, "fork", 4) || ft_strnequ(instruction, "lfork", 5))
 		encoding_byte = "200";
+	else if (ft_strnequ(instruction, "ldi", 3) || ft_strnequ(instruction, "lldi", 4))
+		encoding_byte = "764";
 	else if (ft_strnequ(instruction, "ld", 2) || ft_strnequ(instruction, "lld", 3))
 		encoding_byte = "340";
+	else if (ft_strnequ(instruction, "sti", 3))
+		encoding_byte = "476";
 	else if (ft_strnequ(instruction, "st", 2))
 		encoding_byte = "450";
 	else if (ft_strnequ(instruction, "add", 3) || ft_strnequ(instruction, "sub", 3))
@@ -31,10 +35,6 @@ void	init_chmod_lookalike(t_component *component)
 	else if (ft_strnequ(instruction, "and", 3) || ft_strnequ(instruction, "or", 2) || \
 		ft_strnequ(instruction, "xor", 3))
 		encoding_byte = "774";
-	else if (ft_strnequ(instruction, "ldi", 3) || ft_strnequ(instruction, "lldi", 4))
-		encoding_byte = "764";
-	else if (ft_strnequ(instruction, "sti", 3))
-		encoding_byte = "476";
 	else
 		encoding_byte = "400";
 	component->encoding_byte = encoding_byte;
@@ -97,11 +97,28 @@ t_argument	check_and_init_arg(t_component *component, int arg_number)
 	return (argument);
 }
 
+static int	is_ld_or_st(char *buf)
+{
+	char	*str;
+
+	str = ft_strtrim(buf);
+	if (ft_strlen(str) > 2)
+	{
+		if (str[0] == 's' && str[1] == 't' && str[2] != 'i')
+			return (1);
+		if (str[0] == 'l' && str[1] == 'd' && str[2] != 'i')
+			return (1);
+	}
+	return (0);
+}
+
 int			get_label_size(char *buf)
 {
 	int		i;
 
 	i = 0;
+	if (is_ld_or_st(buf))
+		return (4);
 	while (i < 6)
 	{
 		if (ft_strnequ(buf, instructions_label_2[i], ft_strlen(instructions_label_2[i])))

@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/20 14:38:46 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/28 13:08:01 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/02 15:36:00 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ int				calculate_distance_to_label(t_argument argument, t_component *curr_compon
 {
 	int		index;
 	int		label_index;
-	int		instruction_index;
 	int		distance;
 	int		one_found;
 
@@ -76,7 +75,7 @@ int				calculate_distance_to_label(t_argument argument, t_component *curr_compon
 	{
 		if (all_components[index].type == label)
 		{
-			if (ft_strnequ(all_components[index].str, ft_joinfree(&argument.str[2], ":", 0), ft_strlen(&argument.str[2])))
+			if (ft_strnequ(all_components[index].str, ft_joinfree(&argument.str[2], ":", 0), ft_strlen(&argument.str[2]) + 1))
 			{
 				label_index = index;
 				if (one_found == 0)
@@ -89,7 +88,6 @@ int				calculate_distance_to_label(t_argument argument, t_component *curr_compon
 		{
 			if (instr_index == index)
 			{
-				instruction_index = index;
 				if (one_found == 0)
 					one_found = 2;
 				else if (one_found == 1)
@@ -99,11 +97,12 @@ int				calculate_distance_to_label(t_argument argument, t_component *curr_compon
 		if (one_found == 1 && all_components[index].type == instruction)
 			distance -= all_components[index].byte_size;
 		else if (one_found == 2 && all_components[index].type == instruction)
+		{
+			ft_printf("distance: %i += %i\n", distance, all_components[index].byte_size);
 			distance += all_components[index].byte_size;
+		}
 		index++;
 	}
-	if (ft_strequ(argument.str, "%:label"))
-		ft_printf("distance: %i\n", distance);
 	return (distance);
 }
 
@@ -148,6 +147,8 @@ void			write_instruction(int fd, t_component *component, t_component *all_compon
 	if (!ft_strequ(component->encoding_byte, "200"))
 	{
 		component->codage_octal = get_codage_octal(component->arguments);
+		if (ft_strnequ("ldi", component->str, 3))
+			ft_printf("encoding_byte: %s\n", component->encoding_byte);
 		write(fd, &(component->codage_octal), 1);
 	}
 	i = 0;
@@ -162,13 +163,18 @@ void			write_champ_exec_code(t_file in, t_file out)
 {
 	t_component	*component;
 	int			index;
+	int			ctr;
 
 	index = 0;
 	component = in.components;
+	ctr = 0;
 	while (component->str != NULL)
 	{
 		if (component->type == instruction)
+		{
 			write_instruction(out.fd, component, in.components, index);
+			ctr += 1;
+		}
 		component++;
 		index++;
 	}

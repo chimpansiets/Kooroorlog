@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/02 09:42:47 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/28 14:06:46 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/02 13:27:03 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -273,7 +273,7 @@ int		main(void)
 
 	int	fd = open("test_hexdump", O_TRUNC | O_CREAT | O_WRONLY, 0644);
 	
-	ft_printf("%s\n", get_nth_argument("st      r8,-400", 2));
+	ft_printf("%i\n", ft_strnequ("st", "st %12, %:whatever"));
 	// ft_printf("%i\n", 64 & 1 << 6);
 	// ft_printf("%s\n", get_nth_argument("sti r1, %:live, %1,", 1));
 	// init_label_component(&component, "       label_name:", 7);
