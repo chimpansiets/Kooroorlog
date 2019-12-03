@@ -6,13 +6,13 @@
 #    By: svoort <svoort@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/08/15 12:17:02 by svoort         #+#    #+#                 #
-#    Updated: 2019/08/15 12:22:44 by svoort        ########   odam.nl          #
+#    Updated: 2019/12/03 11:18:25 by svoort        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= corewar
 
-SRC		= vm.c
+SRC		= main.c
 
 OBJ		= $(addprefix srcs/,$(SRC:.c=.o))
 

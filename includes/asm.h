@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/15 14:12:56 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/27 16:18:42 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/03 11:51:23 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # define ENCODING_DIRECT(x) (!(x & 2) && x & 1)
 # define ENCODING_INDIRECT(x) (x & 2 && x & 1)
 
-# include <stdio.h>
+# include <stdio.h> // remove this
 # include <limits.h>
 # include <errno.h>
 # include <stdbool.h>
