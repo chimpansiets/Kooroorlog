@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   lstadd_player.c                                    :+:    :+:            */
+/*   read_inits.c                                       :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: avan-rei <marvin@codam.nl>                   +#+                     */
+/*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/12/03 11:32:52 by avan-rei       #+#    #+#                */
-/*   Updated: 2019/12/03 17:20:26 by avan-rei      ########   odam.nl         */
+/*   Created: 2019/12/03 15:59:30 by svoort         #+#    #+#                */
+/*   Updated: 2019/12/03 17:22:04 by avan-rei      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void		lstadd_player(t_vm *vm, t_player **head, t_player *new)
+void	read_champion_name(t_player *player)
 {
-	if (!(*head))
-	{
-		*head = new;
-		vm->total_players++;
-		return ;
-	}
-	new->next = *head;
-	*head = new;
-	vm->total_players++;
+	player->champ_name = ft_memalloc(sizeof(char) * PROG_NAME_LENGTH);
+	read(player->fd, player->champ_name, PROG_NAME_LENGTH);
 }

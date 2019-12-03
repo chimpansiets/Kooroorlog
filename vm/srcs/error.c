@@ -6,7 +6,7 @@
 /*   By: avan-rei <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/02 15:16:54 by avan-rei       #+#    #+#                */
-/*   Updated: 2019/12/03 14:25:09 by avan-rei      ########   odam.nl         */
+/*   Updated: 2019/12/03 16:29:12 by avan-rei      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ static void		errors(t_error type)
 		ft_putstr_fd("Error: Too many players.\n", 2);
 	else if (type == malloc_error)
 		ft_putstr_fd("Malloc Error.\n", 2);
+	else if (type == ex_code_too_big)
+		ft_putstr_fd("Executable code size too big", 2);
 }
 
 void		print_error(t_error type)
