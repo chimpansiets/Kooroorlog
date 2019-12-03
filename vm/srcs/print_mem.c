@@ -1,7 +1,7 @@
 #include "vm.h"
 #include "op.h"
 
-int	print_mem(int *mem)
+void	print_mem(int *mem)
 {
 	int	i;
 
@@ -15,5 +15,4 @@ int	print_mem(int *mem)
 			ft_printf("\n");
 	}
 	ft_printf("]\n");
-	return (0);
 }
