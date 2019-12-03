@@ -1,34 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   check_files.c                                      :+:    :+:            */
+/*   print.c                                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: avan-rei <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/12/03 13:28:03 by avan-rei       #+#    #+#                */
-/*   Updated: 2019/12/03 14:50:07 by avan-rei      ########   odam.nl         */
+/*   Created: 2019/12/03 13:59:21 by avan-rei       #+#    #+#                */
+/*   Updated: 2019/12/03 14:36:17 by avan-rei      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void	read_file(char *file_name)
-{
-	int		fd;
-	
-	fd = open(file_name, O_RDONLY);
-	check_magic_header(fd);
-}
-
-void	check_files(t_vm *vm)
+void	print_players(t_vm *vm)
 {
 	t_player *current;
 
 	current = vm->players;
+	ft_printf("Total_players: %i\n", vm->total_players);
 	while (current != NULL)
 	{
-		read_file(current->file_name);
-		// check_file(current->file_name);
+		ft_printf("Player name: %s\n", current->name);
+		ft_printf("Player ID: %i\n\n", current->id);
 		current = current->next;
 	}
 }
