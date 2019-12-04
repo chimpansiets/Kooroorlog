@@ -1,6 +1,10 @@
 {
 	"files.associations": {
+<<<<<<< HEAD
 		"asm.h": "c",
 		"libft.h": "c"
+=======
+		"vm.h": "c"
+>>>>>>> e272fb454cda66894cbb3a2bdd43966ca609925c
 	}
 }
