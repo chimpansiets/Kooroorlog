@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/15 14:14:01 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/03 17:22:43 by avan-rei      ########   odam.nl         */
+/*   Updated: 2019/12/04 12:55:05 by avan-rei      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,17 @@ typedef struct		e_player {
 	int				position;
 	struct e_player	*next;
 }					t_player;
+
+typedef struct		e_cursor {
+	int				id;
+	int				carry;
+	int				opcode;
+	int				last_live;
+	int				wait_cycles;
+	int				position;
+	int				jump;
+	int				*registries;
+}					t_cursor;
 
 typedef struct		e_vm {
 	int				total_players;
