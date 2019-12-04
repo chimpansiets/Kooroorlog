@@ -6,14 +6,15 @@
 #    By: svoort <svoort@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/08/15 12:17:02 by svoort         #+#    #+#                 #
-#    Updated: 2019/12/03 17:22:54 by avan-rei      ########   odam.nl          #
+#    Updated: 2019/12/04 13:58:23 by svoort        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= corewar
 
 SRC		= vm.c error.c lstadd_player.c lstnew_player.c read_checks.c\
-			print.c save_players.c check_files.c calc_position.c read_inits.c
+			print.c save_players.c check_files.c calc_position.c read_inits.c \
+			arena_init.c
 
 OBJ		= $(addprefix srcs/,$(SRC:.c=.o))
 
