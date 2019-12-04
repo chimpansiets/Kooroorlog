@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   print_mem.c                                        :+:    :+:            */
+/*   lstadd_cursor.c                                    :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: svoort <svoort@student.codam.nl>             +#+                     */
+/*   By: svoort <marvin@codam.nl>                     +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/12/04 15:54:03 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/04 16:11:11 by svoort        ########   odam.nl         */
+/*   Created: 2019/12/04 16:13:40 by svoort         #+#    #+#                */
+/*   Updated: 2019/12/04 16:19:15 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void	print_mem(uint8_t *mem)
+void		lstadd_cursor(t_cursor **head, t_cursor *new)
 {
-	int	i;
-
-	i = 0;
-	ft_printf("[");
-	while (i < MEM_SIZE)
+	if (!(*head))
 	{
-		if (mem[i])
-			ft_printf("\e[0;31m0x%02X,\e[0m", mem[i]);
-		else
-			ft_printf("0x%02X,", mem[i]);
-		i++;
-		if (i % 32 == 0 && i != MEM_SIZE)
-			ft_printf("\n");
+		*head = new;
+		return ;
 	}
-	ft_printf("]\n");
+	new->next = *head;
+	*head = new;
 }
