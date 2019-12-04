@@ -6,7 +6,7 @@
 /*   By: avan-rei <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/02 15:13:28 by avan-rei       #+#    #+#                */
-/*   Updated: 2019/12/04 12:15:54 by avan-rei      ########   odam.nl         */
+/*   Updated: 2019/12/04 13:56:58 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,5 @@ int		main(int argc, char **argv)
 	print_players(vm);
 	check_files(vm);
 	player_introduction(vm);
+	arena_initialization(vm);
 }

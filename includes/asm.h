@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/15 14:12:56 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/03 11:51:23 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/04 13:48:43 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,8 @@ struct			e_component {
 	char			*encoding_byte;
 	unsigned char	codage_octal;
 	t_token			type;
-	u_int32_t		pos;
-	u_int8_t		len;
+	uint32_t		pos;
+	uint8_t			len;
 	t_argument 		arguments[3];
 	size_t			byte_size;
 	size_t			label_size;

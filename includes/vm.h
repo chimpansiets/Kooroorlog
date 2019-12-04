@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/15 14:14:01 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/03 17:22:43 by avan-rei      ########   odam.nl         */
+/*   Updated: 2019/12/04 13:58:47 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ typedef struct		e_player {
 	int				fd;
 	char			*name;
 	char			*champ_name;
-	char			*comment;
+	char			*champ_comment;
 	char			*file_name;
 	int				ex_code_size;
-	int				ex_code;
+	uint8_t			*ex_code;
 	int				position;
 	struct e_player	*next;
 }					t_player;
@@ -81,5 +81,13 @@ int					check_exec_code_size(t_player *player);
 */
 
 void				read_champion_name(t_player *player);
+void				read_champion_comment(t_player *player);
+void				read_exec_code(t_player *player);
+
+/*
+**	arena_init.c
+*/
+
+void				arena_initialization(t_vm *vm);
 
 # endif 

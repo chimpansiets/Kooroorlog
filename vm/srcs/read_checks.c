@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/03 13:57:03 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/03 17:21:56 by avan-rei      ########   odam.nl         */
+/*   Updated: 2019/12/04 13:47:02 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ int						check_exec_code_size(t_player *player)
 	exec_code_size = write_reverse_buffer_dup(buf);
 	size = (int *)ft_memalloc(sizeof(int) + 1);
 	ft_memcpy(size, exec_code_size, 5);
+	player->ex_code_size = *exec_code_size;
 	if (player->ex_code_size > CHAMP_MAX_SIZE)
 		return (0);
 	return (1);
