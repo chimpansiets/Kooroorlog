@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/15 14:14:01 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/04 13:58:47 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/04 14:29:02 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,22 @@ typedef struct		e_player {
 
 typedef struct		e_vm {
 	int				total_players;
+	uint8_t			arena[MEM_SIZE];
 	t_player		*players;
 }					t_vm;
+
+typedef struct		e_cursor
+{
+	int				id;
+	char			carry;
+	int				opcode;
+	int				last_live;
+	int				wait_cycles;
+	int				position;
+	int				jump;
+	char			registries[REG_NUMBER];
+}					t_cursor;
+
 
 void				print_error(t_error type);
 void				print_players(t_vm *vm);
