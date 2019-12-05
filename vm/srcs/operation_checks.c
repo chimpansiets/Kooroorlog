@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 15:23:56 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/05 16:50:38 by avan-rei      ########   odam.nl         */
+/*   Updated: 2019/12/05 17:11:36 by avan-rei      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int		is_valid_operation(t_cursor *cursor, uint8_t arena[MEM_SIZE])
 		return (0);
 }
 
+
+//SIETSE'S FUNCTIE!!!!!
 int		validate_registry_numbers(t_cursor *cursor, uint8_t arena[MEM_SIZE])
 {
 	int		i;
@@ -48,7 +50,7 @@ int		validate_registry_numbers(t_cursor *cursor, uint8_t arena[MEM_SIZE])
 }
 
 
-
+//CHESCO'S FUNCTIE!!!!!!!
 validate_encoding_byte(t_cursor *cursor, uint8_t *arena)
 {
 	int amount_args;
@@ -59,9 +61,5 @@ validate_encoding_byte(t_cursor *cursor, uint8_t *arena)
 		return (1);
 	}
 	amount_args = op_tab[arena[cursor->position]].amount_args;
-	if ((arena[(cursor->position + 1) % MEM_SIZE]
-	{
-		
-	}
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/15 14:14:01 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/05 16:50:24 by avan-rei      ########   odam.nl         */
+/*   Updated: 2019/12/05 17:07:41 by avan-rei      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef struct		s_player {
 typedef struct		s_op {
 	char			*op_name;
 	int				amount_args;
-	int				type_args[3];
+	char			type_args[3];
 	int				opcode;
 	int				wait_cycles;
 	char			has_encoding_byte;

@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   move_cursor.c                                      :+:    :+:            */
+/*   ex_operation.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: avan-rei <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/12/05 16:13:26 by avan-rei       #+#    #+#                */
-/*   Updated: 2019/12/05 17:11:36 by avan-rei      ########   odam.nl         */
+/*   Created: 2019/12/05 16:40:12 by avan-rei       #+#    #+#                */
+/*   Updated: 2019/12/05 16:40:25 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void	move_cursor_to_next_operation(t_cursor *cursor, uint8_t arena[MEM_SIZE])
+void		execute_operation()
 {
-
-}
-
-void	move_cursor_to_next_byte(t_cursor *cursor, uint8_t arena[MEM_SIZE])
-{
-	cursor->position = (cursor->position + 1) % MEM_SIZE;
+	
 }
