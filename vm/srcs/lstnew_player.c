@@ -6,7 +6,7 @@
 /*   By: avan-rei <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/03 11:35:32 by avan-rei       #+#    #+#                */
-/*   Updated: 2019/12/04 13:46:02 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/05 14:27:36 by avan-rei      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char		*ft_strdup_player(char *name)
 	if (name[i - 3] != '.' || name[i - 2] != 'c' ||
 		name[i - 1] != 'o' || name[i] != 'r')
 		print_error(invalid_player_file);
-	return(ft_strndup(name, i - 3));
+	return(ft_strdup(name));
 }
 
 t_player	*lstnew_player(char *name, int id)
@@ -32,13 +32,8 @@ t_player	*lstnew_player(char *name, int id)
 		print_error(malloc_error);
 	if (id > MAX_PLAYERS)
 		print_error(too_many_players);
-	new->name = ft_strdup_player(name);
-	new->file_name = ft_strdup(name);
+	new->file_name = ft_strdup_player(name);
 	new->id = id;
-	new->position = 0;
-	new->champ_comment = NULL;
 	new->ex_code_size = CHAMP_MAX_SIZE;
-	new->ex_code = 0;
-	new->next = NULL;
 	return (new);
 }

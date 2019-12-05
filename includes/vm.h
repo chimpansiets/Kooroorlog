@@ -6,11 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/15 14:14:01 by svoort         #+#    #+#                */
-<<<<<<< HEAD
-/*   Updated: 2019/12/04 12:55:05 by avan-rei      ########   odam.nl         */
-=======
-/*   Updated: 2019/12/04 17:00:12 by svoort        ########   odam.nl         */
->>>>>>> 1a1d73422b8c2df861ecc80171c436555c8c3340
+/*   Updated: 2019/12/05 13:01:41 by avan-rei      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +36,6 @@ typedef enum		e_error {
 typedef struct		s_player {
 	int				id;
 	int				fd;
-	char			*name;
 	char			*champ_name;
 	char			*champ_comment;
 	char			*file_name;
@@ -51,33 +46,20 @@ typedef struct		s_player {
 	struct s_player	*next;
 }					t_player;
 
-<<<<<<< HEAD
-typedef struct		e_cursor {
-	int				id;
-	int				carry;
-=======
 typedef struct		s_cursor
 {
 	int				id;
 	char			carry;
->>>>>>> 1a1d73422b8c2df861ecc80171c436555c8c3340
 	int				opcode;
 	int				last_live;
 	int				wait_cycles;
 	int				position;
 	int				jump;
-<<<<<<< HEAD
-	int				*registries;
-}					t_cursor;
-
-typedef struct		e_vm {
-=======
 	char			registries[REG_NUMBER];
 	struct s_cursor	*next;
 }					t_cursor;
 
 typedef struct		s_vm {
->>>>>>> 1a1d73422b8c2df861ecc80171c436555c8c3340
 	int				total_players;
 	int				last_alive;
 	int				cycle_counter;
@@ -169,6 +151,13 @@ void				the_battle(t_vm *vm);
 **	cursor_checks.c
 */
 
-int					player_alive(t_player *players);
+int					check(t_vm *vm);
+
+/*
+**	cw_lstrem.c
+*/
+
+void				rm_cursor(t_cursor **head, t_cursor *to_remove);
+
 
 # endif 

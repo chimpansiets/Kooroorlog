@@ -6,7 +6,7 @@
 /*   By: avan-rei <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/03 12:59:03 by avan-rei       #+#    #+#                */
-/*   Updated: 2019/12/04 12:16:20 by avan-rei      ########   odam.nl         */
+/*   Updated: 2019/12/05 14:27:36 by avan-rei      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static void		check_players(t_vm *vm)
 		check = vm->players;
 		while (check != NULL)
 		{
-			if (current->id == check->id && ft_strequ(current->name, check->name) != 1)
+			if (current->id == check->id && ft_strequ(current->file_name, check->file_name) != 1) //dees naar name
 				print_error(invalid_id);
 			check = check->next;
 		}
