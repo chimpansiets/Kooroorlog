@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/15 12:19:15 by svoort         #+#    #+#                */
-/*   Updated: 2019/08/20 12:29:21 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/05 14:56:33 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,16 @@ typedef struct			s_header
 	unsigned int		prog_size;
 	char				comment[COMMENT_LENGTH + 1];
 }						t_header;
+
+typedef struct			s_op
+{
+	char				*op_name;
+	int					amount_args;
+	int					type_args[3];
+	int					opcode;
+	int					wait_cycles;
+	int					encoding_byte;
+	int					label_size;
+}						t_op;
 
 #endif
