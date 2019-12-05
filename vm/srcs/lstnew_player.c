@@ -6,7 +6,7 @@
 /*   By: avan-rei <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/03 11:35:32 by avan-rei       #+#    #+#                */
-/*   Updated: 2019/12/04 12:16:14 by avan-rei      ########   odam.nl         */
+/*   Updated: 2019/12/04 13:46:02 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_player	*lstnew_player(char *name, int id)
 	new->file_name = ft_strdup(name);
 	new->id = id;
 	new->position = 0;
-	new->comment = NULL;
+	new->champ_comment = NULL;
 	new->ex_code_size = CHAMP_MAX_SIZE;
 	new->ex_code = 0;
 	new->next = NULL;

@@ -6,7 +6,7 @@
 /*   By: avan-rei <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/03 13:59:21 by avan-rei       #+#    #+#                */
-/*   Updated: 2019/12/04 12:16:07 by avan-rei      ########   odam.nl         */
+/*   Updated: 2019/12/04 16:04:10 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	print_players(t_vm *vm)
 	{
 		ft_printf("Player name: %s\n", current->name);
 		ft_printf("Player ID: %i\n", current->id);
-		ft_printf("Player code_size: %i\n\n", current->ex_code_size);
+		ft_printf("Player code_size: %i\n", current->ex_code_size);
 		ft_printf("Player position: %i\n\n", current->position);
 		current = current->next;
 	}

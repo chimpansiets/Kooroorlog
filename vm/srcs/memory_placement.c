@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   print_mem.c                                        :+:    :+:            */
+/*   memory_placement.c                                 :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/12/04 15:54:03 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/04 16:11:11 by svoort        ########   odam.nl         */
+/*   Created: 2019/12/04 16:01:59 by svoort         #+#    #+#                */
+/*   Updated: 2019/12/04 16:06:30 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void	print_mem(uint8_t *mem)
+void	place_player_in_mem(t_vm *vm, t_player *player)
 {
-	int	i;
+	int		i;
 
 	i = 0;
-	ft_printf("[");
-	while (i < MEM_SIZE)
+	while (i < player->ex_code_size)
 	{
-		if (mem[i])
-			ft_printf("\e[0;31m0x%02X,\e[0m", mem[i]);
-		else
-			ft_printf("0x%02X,", mem[i]);
+		vm->arena[player->position + i] = player->ex_code[i];
 		i++;
-		if (i % 32 == 0 && i != MEM_SIZE)
-			ft_printf("\n");
 	}
-	ft_printf("]\n");
 }

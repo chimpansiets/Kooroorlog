@@ -6,7 +6,11 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/15 14:14:01 by svoort         #+#    #+#                */
+<<<<<<< HEAD
 /*   Updated: 2019/12/04 12:55:05 by avan-rei      ########   odam.nl         */
+=======
+/*   Updated: 2019/12/04 17:00:12 by svoort        ########   odam.nl         */
+>>>>>>> 1a1d73422b8c2df861ecc80171c436555c8c3340
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,39 +37,63 @@ typedef enum		e_error {
 	ex_code_too_big,
 }					t_error;
 
-typedef struct		e_player {
+typedef struct		s_player {
 	int				id;
 	int				fd;
 	char			*name;
 	char			*champ_name;
-	char			*comment;
+	char			*champ_comment;
 	char			*file_name;
 	int				ex_code_size;
-	int				ex_code;
+	uint8_t			*ex_code;
 	int				position;
-	struct e_player	*next;
+	int				last_alive;
+	struct s_player	*next;
 }					t_player;
 
+<<<<<<< HEAD
 typedef struct		e_cursor {
 	int				id;
 	int				carry;
+=======
+typedef struct		s_cursor
+{
+	int				id;
+	char			carry;
+>>>>>>> 1a1d73422b8c2df861ecc80171c436555c8c3340
 	int				opcode;
 	int				last_live;
 	int				wait_cycles;
 	int				position;
 	int				jump;
+<<<<<<< HEAD
 	int				*registries;
 }					t_cursor;
 
 typedef struct		e_vm {
+=======
+	char			registries[REG_NUMBER];
+	struct s_cursor	*next;
+}					t_cursor;
+
+typedef struct		s_vm {
+>>>>>>> 1a1d73422b8c2df861ecc80171c436555c8c3340
 	int				total_players;
+	int				last_alive;
+	int				cycle_counter;
+	int				live_counter;
+	int				check_counter;
+	int				cycles_to_die;
+	uint8_t			arena[MEM_SIZE];
 	t_player		*players;
+	t_cursor		*cursors;
 }					t_vm;
 
 void				print_error(t_error type);
 void				print_players(t_vm *vm);
 
 void				lstadd_player(t_vm *vm, t_player **head, t_player *new);
+
 t_player			*lstnew_player(char *name, int id);
 
 void				save_players(t_vm *vm, int argc, char **argv);
@@ -92,5 +120,55 @@ int					check_exec_code_size(t_player *player);
 */
 
 void				read_champion_name(t_player *player);
+void				read_champion_comment(t_player *player);
+void				read_exec_code(t_player *player);
+
+/*
+**	arena_init.c
+*/
+
+void				arena_initialization(t_vm *vm);
+
+/*
+**	print_mem.c
+*/
+
+void				print_mem(uint8_t *mem);
+
+/*
+**	memory_placement.c
+*/
+
+void				place_player_in_mem(t_vm *vm, t_player *player);
+
+/*
+**	lstadd_cursor.c
+*/
+
+void				lstadd_cursor(t_cursor **head, t_cursor *new);
+
+/*
+**	lstnew_cursor.c
+*/
+
+t_cursor			*lstnew_cursor(t_player *player);
+
+/*
+**	vm_init.c
+*/
+
+void				vm_init(t_vm *vm);
+
+/*
+**	the_battle.c
+*/
+
+void				the_battle(t_vm *vm);
+
+/*
+**	cursor_checks.c
+*/
+
+int					player_alive(t_player *players);
 
 # endif 
