@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/15 14:14:01 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/05 15:07:09 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/05 15:16:45 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,19 +46,17 @@ typedef struct		s_player {
 	struct s_player	*next;
 }					t_player;
 
-typedef struct			s_op
-{
-	char				*op_name;
-	int					amount_args;
-	int					type_args[3];
-	int					opcode;
-	int					wait_cycles;
-	int					encoding_byte;
-	int					label_size;
-}						t_op;
+typedef struct		s_op {
+	char			*op_name;
+	int				amount_args;
+	int				type_args[3];
+	int				opcode;
+	int				wait_cycles;
+	int				encoding_byte;
+	int				label_size;
+}					t_op;
 
-typedef struct		s_cursor
-{
+typedef struct		s_cursor {
 	int				id;
 	char			carry;
 	int				opcode;
@@ -163,6 +161,12 @@ void				the_battle(t_vm *vm);
 */
 
 int					check(t_vm *vm);
+
+/*
+**	cursor_operations.c
+*/
+
+void				execute_cursors(t_vm *vm);
 
 /*
 **	cw_lstrem.c

@@ -6,15 +6,18 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 14:31:16 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/05 14:51:06 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/05 15:19:36 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
+extern		t_op	op_tab[17];
+
 void		assign_new_opcode(t_cursor *cursor, uint8_t arena[MEM_SIZE])
 {
 	cursor->opcode = arena[cursor->position % MEM_SIZE];
+	cursor->wait_cycles = op_tab[cursor->opcode].wait_cycles;
 }
 
 void		check_operation(t_cursor *cursor, uint8_t arena[MEM_SIZE])
