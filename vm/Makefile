@@ -6,7 +6,7 @@
 #    By: svoort <svoort@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/08/15 12:17:02 by svoort         #+#    #+#                 #
-#    Updated: 2019/12/05 15:17:25 by svoort        ########   odam.nl          #
+#    Updated: 2019/12/05 16:15:17 by avan-rei      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ NAME	= corewar
 SRC		= vm.c error.c cw_lstadd.c cw_lstnew.c read_checks.c\
 			print.c save_players.c check_files.c calc_position.c read_inits.c \
 			arena_init.c print_mem.c memory_placement.c vm_init.c the_battle.c \
-			player_checks.c cursor_checks.c cw_lstrem.c op_tab.c cursor_operations.c
+			player_checks.c cursor_checks.c cw_lstrem.c op_tab.c \
+			cursor_operations.c operations_checks.c move_cursor.c
 
 OBJ		= $(addprefix srcs/,$(SRC:.c=.o))
 

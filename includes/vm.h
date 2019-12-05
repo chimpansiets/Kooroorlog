@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/15 14:14:01 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/05 15:16:45 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/05 16:50:24 by avan-rei      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ typedef struct		s_op {
 	int				type_args[3];
 	int				opcode;
 	int				wait_cycles;
-	int				encoding_byte;
+	char			has_encoding_byte;
 	int				label_size;
 }					t_op;
 
@@ -65,6 +65,7 @@ typedef struct		s_cursor {
 	int				position;
 	int				jump;
 	char			registries[REG_NUMBER];
+	uint8_t			encoding_byte;
 	struct s_cursor	*next;
 }					t_cursor;
 
