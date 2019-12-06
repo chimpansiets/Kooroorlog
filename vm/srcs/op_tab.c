@@ -6,13 +6,13 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 14:59:56 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/05 17:11:40 by avan-rei      ########   odam.nl         */
+/*   Updated: 2019/12/06 11:18:38 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-t_op    op_tab[17] =
+t_op	op_tab[17] =
 {
 	{"live", 1, {T_DIR}, 1, 10, 0, 4},
 	{"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, 1, 4},

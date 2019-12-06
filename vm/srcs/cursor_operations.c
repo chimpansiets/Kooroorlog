@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 14:31:16 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/05 17:11:41 by avan-rei      ########   odam.nl         */
+/*   Updated: 2019/12/06 11:27:44 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void		check_operation(t_cursor *cursor, uint8_t arena[MEM_SIZE])
 void		decrease_wait_cycles(t_cursor *cursor)
 {
 	if (cursor->wait_cycles > 0)
-		cursor->wait_cycles++;
+		cursor->wait_cycles--;
 }
 
 void		execute_cursors(t_vm *vm)

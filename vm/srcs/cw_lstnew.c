@@ -6,7 +6,7 @@
 /*   By: avan-rei <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 12:55:30 by avan-rei       #+#    #+#                */
-/*   Updated: 2019/12/05 16:30:16 by avan-rei      ########   odam.nl         */
+/*   Updated: 2019/12/06 11:02:10 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,6 @@ t_cursor	*lstnew_cursor(t_player *player)
 	if (new == NULL)
 		print_error(malloc_error);
 	new->id = player->id;
-	new->carry = 0;
-	new->opcode = 0;
-	new->last_live = 0;
-	new->wait_cycles = 0;
 	new->position = player->position;
-	new->jump = 0;
-	new->next = NULL;
 	return (new);
 }

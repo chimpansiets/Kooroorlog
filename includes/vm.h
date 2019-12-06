@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/15 14:14:01 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/05 17:07:41 by avan-rei      ########   odam.nl         */
+/*   Updated: 2019/12/06 11:02:33 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct		s_cursor {
 	int				jump;
 	char			registries[REG_NUMBER];
 	uint8_t			encoding_byte;
+	char			has_encoding_byte;
 	struct s_cursor	*next;
 }					t_cursor;
 
