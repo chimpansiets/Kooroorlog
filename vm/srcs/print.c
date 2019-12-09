@@ -6,7 +6,7 @@
 /*   By: avan-rei <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/03 13:59:21 by avan-rei       #+#    #+#                */
-/*   Updated: 2019/12/05 14:27:36 by avan-rei      ########   odam.nl         */
+/*   Updated: 2019/12/09 15:52:22 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	print_players(t_vm *vm)
 	ft_printf("Total_players: %i\n\n", vm->total_players);
 	while (current != NULL)
 	{
+		if (vm->dump_flag != -1)
+			ft_printf("%s flag: %i\n", vm->flag, vm->dump_flag);
 		ft_printf("Player name: %s\n", current->champ_name);
 		ft_printf("Player ID: %i\n", current->id);
 		ft_printf("Player code_size: %i\n", current->ex_code_size);

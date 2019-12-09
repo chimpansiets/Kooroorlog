@@ -6,7 +6,7 @@
 /*   By: avan-rei <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/03 12:59:03 by avan-rei       #+#    #+#                */
-/*   Updated: 2019/12/05 14:27:36 by avan-rei      ########   odam.nl         */
+/*   Updated: 2019/12/09 13:58:55 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ static int      check_id(char *id)
     return (1);
 }
 
-static int 		check_n_flag(char *n_flag)
+static int 		check_flag(char *str, char flag)
 {
 	int i;
 
 	i = 1;
-	while (n_flag[i] != '\0')
+	while (str[i] != '\0')
 	{
-		if (n_flag[i] != 'n')
+		if (str[i] != flag && ft_strequ(str, "-dump") != 1)
 			print_error(invalid_flag);
 		i++;
 	}
@@ -40,12 +40,30 @@ static void		find_n_flag(t_vm *vm, int argc, char **argv)
 	i = 1;
 	while (i < argc)
 	{
-		if (ft_strnequ(argv[i], "-n", 2) == 1 && check_n_flag(argv[i]) == 1)
+		if (ft_strnequ(argv[i], "-n", 2) == 1 && check_flag(argv[i], 'n') == 1)
 		{
-            while (ft_strnequ(argv[i], "-n", 2) == 1 && check_n_flag(argv[i]) == 1)
+            while (ft_strnequ(argv[i], "-n", 2) == 1 && check_flag(argv[i], 'n') == 1)
                 i++;
             if (check_id(argv[i]))
 			    lstadd_player(vm, &vm->players, lstnew_player(argv[i + 1], ft_atoi(argv[i])));
+		}
+		i++;
+	}
+}
+
+static void		find_d_flag(t_vm *vm, int argc, char **argv)
+{
+	int i;
+
+	i = 0;
+	while (i < argc)
+	{
+		if ((ft_strnequ(argv[i], "-d", 2) == 1 || ft_strnequ(argv[i], "-dump", 5) == 1) && check_flag(argv[i], 'd') == 1)
+		{
+			while ((ft_strnequ(argv[i], "-d", 2) == 1 || ft_strnequ(argv[i], "-dump", 5) == 1) && check_flag(argv[i], 'd') == 1)
+				i++;
+			vm->dump_flag = ft_atoi(argv[i]);
+			vm->flag = ft_strdup(argv[i - 1]);
 		}
 		i++;
 	}
@@ -94,11 +112,12 @@ void			save_players(t_vm *vm, int argc, char **argv)
 	i = 1;
     id = 1;
 	find_n_flag(vm , argc, argv);
+	find_d_flag(vm , argc, argv);
 	while (i < argc)
 	{
-        if (ft_strnequ(argv[i], "-n", 2) == 1)
+        if (ft_strnequ(argv[i], "-n", 2) == 1 || ft_strnequ(argv[i], "-d", 2) == 1 || ft_strnequ(argv[i], "-dump", 5) == 1)
         {
-            while (ft_strnequ(argv[i], "-n", 2) == 1)
+            while (ft_strnequ(argv[i], "-n", 2) == 1 || ft_strnequ(argv[i], "-d", 2) == 1 || ft_strnequ(argv[i], "-dump", 5) == 1)
                 i++;
             i += 2;
             continue ;

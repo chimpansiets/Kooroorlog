@@ -6,13 +6,35 @@
 /*   By: avan-rei <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 16:13:26 by avan-rei       #+#    #+#                */
-/*   Updated: 2019/12/06 11:27:23 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/09 16:02:29 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
 extern	t_op	op_tab[17];
+
+int		get_instruction_size(t_cursor *cursor, uint8_t arena[MEM_SIZE])
+{
+	char	エンコードバイト;
+	int		instruction_size;
+	int		i;
+
+	i = 0;
+	エンコードバイト = arena[cursor->position + 1];
+	instruction_size = 0;
+	while (i < op_tab[cursor->opcode - 1].amount_args)
+	{
+		if (T_REG & (cursor->encoding_byte >> (6 - (i * 2))))
+			instruction_size += 1;
+		else if (T_DIR & (cursor->encoding_byte >> (6 - (i * 2))))
+			instruction_size += 2;
+		else if (T_IND & (cursor->encoding_byte >> (6 - (i * 2))))
+			instruction_size += 4;
+		i++;
+	}
+	return (instruction_size);
+}
 
 void	move_cursor_to_next_operation(t_cursor *cursor, uint8_t arena[MEM_SIZE])
 {
@@ -23,11 +45,8 @@ void	move_cursor_to_next_operation(t_cursor *cursor, uint8_t arena[MEM_SIZE])
 	i = 0;
 	while (i < op_tab[cursor->opcode - 1].amount_args)
 	{
-		if (cursor->has_encoding_byte)
-		{
-			//ander verhaal, moet encoding byte in arena zelf checken.
-			
-		}
+		if (cursor->encoding_byte)
+			new_position += get_instruction_size(cursor, arena);
 		else
 		{
 			if (T_REG & op_tab[2].type_args[i])
@@ -39,6 +58,7 @@ void	move_cursor_to_next_operation(t_cursor *cursor, uint8_t arena[MEM_SIZE])
 		}
 		i++;
 	}
+	cursor->position = new_position;
 }
 
 void	move_cursor_to_next_byte(t_cursor *cursor, uint8_t arena[MEM_SIZE])

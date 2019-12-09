@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/04 13:57:08 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/04 16:33:08 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/09 13:48:20 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,6 @@ void		place_executable_code(t_vm *vm)
 void		arena_initialization(t_vm *vm)
 {
 	place_executable_code(vm);
-	print_mem(vm->arena);
+	//print_mem(vm->arena);
 	initialize_cursors(vm);
 }

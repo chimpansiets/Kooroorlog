@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 12:59:18 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/05 13:04:24 by avan-rei      ########   odam.nl         */
+/*   Updated: 2019/12/09 15:52:17 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,5 @@ void		rm_cursor(t_cursor **head, t_cursor *to_remove)
 		temp = NULL;
 	}
 	else
-		dikke_error_a_bro_dingetje_bestaat_niet(1);
+		print_error(not_exist);
 }

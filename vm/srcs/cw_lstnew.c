@@ -6,7 +6,7 @@
 /*   By: avan-rei <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 12:55:30 by avan-rei       #+#    #+#                */
-/*   Updated: 2019/12/06 11:02:10 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/09 15:52:19 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,6 @@ t_cursor	*lstnew_cursor(t_player *player)
 		print_error(malloc_error);
 	new->id = player->id;
 	new->position = player->position;
+	new->wait_cycles = -1;
 	return (new);
 }
