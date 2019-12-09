@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 15:23:56 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/09 16:05:17 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/09 17:00:54 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ int		validate_registry_numbers(t_cursor *cursor, uint8_t arena[MEM_SIZE])
 static int	bit_shift_gedoe(int encoding_byte, char op_index)
 {
 	int i;
-	int arg;
 
 	i = 2;
 	if (encoding_byte & 3)
@@ -62,7 +61,22 @@ static int	bit_shift_gedoe(int encoding_byte, char op_index)
 	while (i >= 0)
 	{
 		encoding_byte >> 2;
-		if (encoding_byte & op_tab[op_index].type_args[i])
+		if (encoding_byte & 3 == 3)
+		{
+			if (op_tab[op_index].type_args[i] ^ 4)
+				return (0);
+		}
+		else if (encoding_byte & 2 == 2)
+		{
+			if (op_tab[op_index].type_args[i] ^ 2)
+				return (0);
+		}
+		else if (encoding_byte & 1 == 1)
+		{
+			if (op_tab[op_index].type_args[i] ^ 1)
+				return (0);
+		}
+		else if (i < op_tab[op_index].amount_args)
 			return (0);
 		i--;
 	}
