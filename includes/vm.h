@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/15 14:14:01 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/09 15:52:31 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/10 16:37:14 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ typedef struct		s_cursor {
 	int				wait_cycles;
 	int				position;
 	int				jump;
-	char			registries[REG_NUMBER];
+	int				registries[REG_NUMBER];
 	uint8_t			encoding_byte;
 	char			has_encoding_byte;
 	struct s_cursor	*next;
@@ -87,6 +87,7 @@ typedef struct		s_vm {
 
 void				print_error(t_error type);
 void				print_players(t_vm *vm);
+void				print_cursor(t_vm *vm);
 
 void				lstadd_player(t_vm *vm, t_player **head, t_player *new);
 
@@ -96,6 +97,14 @@ void				save_players(t_vm *vm, int argc, char **argv);
 void				calc_position(t_vm *vm);
 void				check_files(t_vm *vm);
 void				player_introduction(t_vm *vm);
+void				execute_operations(t_vm *vm, t_cursor *cursor, uint8_t arena[MEM_SIZE]);
+int					reverse_bytes(int nb);
+
+/*
+**	live.c
+*/
+
+void				live(t_cursor *cursor, t_vm *vm, uint8_t arena[MEM_SIZE]);
 
 /*
 **	check_files.c

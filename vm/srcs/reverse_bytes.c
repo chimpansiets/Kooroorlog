@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   the_battle.c                                       :+:    :+:            */
+/*   reverse_bytes.c                                    :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: svoort <svoort@student.codam.nl>             +#+                     */
+/*   By: svoort <marvin@codam.nl>                     +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/12/04 16:25:47 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/10 15:31:09 by svoort        ########   odam.nl         */
+/*   Created: 2019/12/10 15:25:12 by svoort         #+#    #+#                */
+/*   Updated: 2019/12/10 15:56:18 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void		the_battle(t_vm *vm)
+int		reverse_bytes(int nb)
 {
-	int		i;
+	int one;
+	int two;
+	int three;
+	int four;
 
-	while (check(vm) == 1)
-	{
-		i = 0;
-		while (i < vm->cycles_to_die)
-		{
-			execute_cursors(vm);
-			i++;
-		}
-		vm->check_counter++;
-	}
+	one = nb >> 24;
+	two = nb << 8;
+	two = two >> 24;
+	two = two << 8;
+	three = nb << 16;
+	three = three >> 24;
+	three = three << 16;
+	four = nb << 24;
+	return (one + two + three + four);
 }

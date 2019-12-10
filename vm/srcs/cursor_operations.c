@@ -6,11 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 14:31:16 by svoort         #+#    #+#                */
-<<<<<<< HEAD
-/*   Updated: 2019/12/10 11:26:16 by svoort        ########   odam.nl         */
-=======
-/*   Updated: 2019/12/09 18:04:09 by avan-rei      ########   odam.nl         */
->>>>>>> 788eb71ed76fb75eb14313d78cc8ff7482b4451d
+/*   Updated: 2019/12/10 15:06:00 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,30 +20,27 @@ void		assign_new_opcode(t_cursor *cursor, uint8_t arena[MEM_SIZE])
 	cursor->wait_cycles = op_tab[cursor->opcode - 1].wait_cycles;
 }
 
-void		check_operation(t_cursor *cursor, uint8_t arena[MEM_SIZE])
+void		check_operation(t_vm *vm, t_cursor *cursor, uint8_t arena[MEM_SIZE])
 {
-	int		ret_reg;
-	int		ret_encodo_baituh;
-
-	ret_reg = 0;
-	ret_encodo_baituh = 0;
 	if (is_valid_operation(cursor, arena))
 	{
 		if (cursor->wait_cycles == -1)
-			assign_new_opcode(cursor, arena);
-		if (cursor->wait_cycles == 0 && (ret_encodo_baituh = validate_encoding_byte(cursor, arena)) && (ret_reg = validate_registry_numbers(cursor, arena)))
 		{
-			ft_printf("valid registries and encodo baïtuh\n");
+			assign_new_opcode(cursor, arena);
+			ft_printf("%s: wait_cycles: %i\n", op_tab[cursor->opcode - 1].op_name, cursor->wait_cycles);
+		}
+		if (cursor->wait_cycles == 0 && validate_encoding_byte(cursor, arena) && validate_registry_numbers(cursor, arena))
+		{
+			execute_operations(vm, cursor, arena);
 			move_cursor_to_next_operation(cursor, arena);
 			cursor->wait_cycles = -1;
 			return ;
 		}
 		else if (cursor->wait_cycles == 0)
-		{
-			ft_printf("ret_reg: %i\tret_encodo_baituh: %i\n", ret_reg, ret_encodo_baituh);
 			move_cursor_to_next_byte(cursor, arena);
-		}
 	}
+	if (cursor->wait_cycles == -1)
+		move_cursor_to_next_byte(cursor, arena);
 	return ;
 }
 
@@ -87,17 +80,13 @@ void		execute_cursors(t_vm *vm)
 	while (to_execute)
 	{
 		if (to_execute->wait_cycles <= 0)
-		{
-			ft_printf("wait_cycles = %i\n", to_execute->wait_cycles);
-			check_operation(to_execute, vm->arena);
-		}
+			check_operation(vm, to_execute, vm->arena);
 		if (to_execute->wait_cycles != -1)
-		{
-			ft_printf("curr wait_cycles: %i\n", to_execute->wait_cycles);
 			decrease_wait_cycles(to_execute);
-		}
+		to_execute->last_live++;
 		to_execute = to_execute->next;
 	}
-	print_cursor_pos(vm->cursors);
+	vm->cycle_counter++;
+	//print_cursor_pos(vm->cursors);
 	check_dump(vm);
 }
