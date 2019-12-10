@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/15 14:14:01 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/06 11:02:33 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/09 15:52:31 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef enum		e_error {
 	too_many_players,
 	malloc_error,
 	ex_code_too_big,
+	not_exist,
 }					t_error;
 
 typedef struct		s_player {
@@ -71,6 +72,8 @@ typedef struct		s_cursor {
 }					t_cursor;
 
 typedef struct		s_vm {
+	char			*flag;
+	int				dump_flag;
 	int				total_players;
 	int				last_alive;
 	int				cycle_counter;
@@ -176,5 +179,19 @@ void				execute_cursors(t_vm *vm);
 
 void				rm_cursor(t_cursor **head, t_cursor *to_remove);
 
+/*
+**	operation_checks.c
+*/
+
+int					is_valid_operation(t_cursor *cursor, uint8_t arena[MEM_SIZE]);
+int					validate_registry_numbers(t_cursor *cursor, uint8_t arena[MEM_SIZE]);
+int					validate_encoding_byte(t_cursor *cursor, uint8_t arena[MEM_SIZE]);
+
+/*
+**	move_cursor.c
+*/
+
+void				move_cursor_to_next_operation(t_cursor *cursor, uint8_t arena[MEM_SIZE]);
+void				move_cursor_to_next_byte(t_cursor *cursor, uint8_t arena[MEM_SIZE]);
 
 # endif 
