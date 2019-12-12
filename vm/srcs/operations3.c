@@ -6,7 +6,7 @@
 /*   By: svoort <marvin@codam.nl>                     +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 15:36:10 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/11 19:08:27 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/12 16:34:10 by avan-rei      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 void	fork(t_vm *vm, t_cursor *cursor, uint8_t arena[MEM_SIZE])
 {
-	t_cursor *new;
+	t_cursor	*new;
+	int			write_value;
 
 	new = cursor;
-	new->position = get_value(new, arena, 1, VALUE) % IDX_MOD % MEM_SIZE;
+	write_value = get_value(cursor, arena, 1, VALUE);
+	new->position = write_value % IDX_MOD % MEM_SIZE;
 	lstadd_cursor(&(vm->cursors), new);
 }
 

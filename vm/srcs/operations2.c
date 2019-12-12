@@ -6,7 +6,7 @@
 /*   By: svoort <marvin@codam.nl>                     +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 15:36:06 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/11 19:35:59 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/12 16:32:57 by avan-rei      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,12 @@ void	and_or_xor(t_cursor *cursor, uint8_t arena[MEM_SIZE], int bitwise)
 
 void	zjmp(t_cursor *cursor, uint8_t arena[MEM_SIZE])
 {
+	int write_value;
+
+	write_value = get_value(cursor, arena, 1, -1);
 	if (cursor->carry == 0)
 		return ;
-	cursor->position = (cursor->position + (get_value(cursor, arena, 1, -1) % IDX_MOD)) % MEM_SIZE;
+	cursor->position = (cursor->position + write_value % IDX_MOD) % MEM_SIZE;
 }
 
 void	ldi(t_cursor *cursor, uint8_t arena[MEM_SIZE])
