@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/11 12:28:22 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/12 14:19:03 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/12 14:21:44 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,5 @@ int		get_value(t_cursor *cursor, uint8_t arena[MEM_SIZE], int argument_nb)
 		if (label_size == 2)
 			return ((int)(*((short *)&arena[(cursor->position + 1 + cursor->has_encoding_byte) % MEM_SIZE])));
 		else
-		
 	}
 }
