@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 14:31:16 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/10 15:06:00 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/12 14:19:02 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void		check_operation(t_vm *vm, t_cursor *cursor, uint8_t arena[MEM_SIZE])
 		}
 		if (cursor->wait_cycles == 0 && validate_encoding_byte(cursor, arena) && validate_registry_numbers(cursor, arena))
 		{
+			initialize_argument_pos(cursor);
 			execute_operations(vm, cursor, arena);
 			move_cursor_to_next_operation(cursor, arena);
 			cursor->wait_cycles = -1;

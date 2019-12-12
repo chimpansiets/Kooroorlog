@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 15:37:01 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/10 15:53:23 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/11 19:08:23 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,4 @@ int		reverse_bytes(int nb)
 	three = three << 16;
 	four = nb << 24;
 	return (one + two + three + four);
-}
-
-int		main(void)
-{
-	int		i;
-
-	i = 0;
-	while (i < 500000000)
-	{
-		reverse_bytes(257);
-		i++;
-	}
-	printf("done\n");
-	return (0);
 }

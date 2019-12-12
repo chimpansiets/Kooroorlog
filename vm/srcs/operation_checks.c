@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 15:23:56 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/10 11:53:56 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/12 14:19:06 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,13 @@ int		validate_registry_numbers(t_cursor *cursor, uint8_t arena[MEM_SIZE])
 	return (1);
 }
 
-static int	bit_shift_gedoe(int encoding_byte, char op_index)
+static int	bit_shift_gedoe(t_cursor *cursor, int encoding_byte, char op_index)
 {
 	int i;
+	int	offset;
 
 	i = 2;
+	offset = 1;
 	while (i >= 0)
 	{
 		encoding_byte = encoding_byte >> 2;
@@ -63,16 +65,19 @@ static int	bit_shift_gedoe(int encoding_byte, char op_index)
 		{
 			if ((op_tab[op_index].type_args[i] & T_IND) != T_IND)
 				return (0);
+			cursor->type_arguments[i] = T_IND;
 		}
 		else if ((encoding_byte & 2) == 2)
 		{
 			if ((op_tab[op_index].type_args[i] & T_DIR) != T_DIR)
 				return (0);
+			cursor->type_arguments[i] = T_DIR;
 		}
 		else if ((encoding_byte & 1) == 1)
 		{
 			if ((op_tab[op_index].type_args[i] & T_REG) != T_REG)
 				return (0);
+			cursor->type_arguments[i] = T_REG;
 		}
 		else if (i < op_tab[op_index].amount_args)
 			return (0);
@@ -89,8 +94,9 @@ int		validate_encoding_byte(t_cursor *cursor, uint8_t arena[MEM_SIZE])
 		cursor->encoding_byte = arena[(cursor->position + 1) % MEM_SIZE];
 		if (cursor->encoding_byte & 3)
 			return (0);
-		if (!(bit_shift_gedoe(cursor->encoding_byte, arena[cursor->position % MEM_SIZE] - 1)))
+		if (!(bit_shift_gedoe(cursor, cursor->encoding_byte, arena[cursor->position % MEM_SIZE] - 1)))
 			return (0);
+		cursor->has_encoding_byte = 1;
 	}
 	return (1);
 }

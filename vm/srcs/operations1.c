@@ -6,7 +6,7 @@
 /*   By: svoort <marvin@codam.nl>                     +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 12:47:57 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/10 16:41:34 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/11 19:18:34 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	live(t_cursor *cursor, t_vm *vm, uint8_t arena[MEM_SIZE])
 	int				argument;
 	unsigned char	*reverse_argument;
 
-	argument = *((int *)&arena[cursor->position + 1]);
+	argument = *((int *)&arena[cursor->position + 1 % MEM_SIZE]);
 	argument = reverse_bytes(argument);
 	if (-(vm->total_players) <= argument && argument <= -1)
 	{
@@ -40,4 +40,42 @@ void	live(t_cursor *cursor, t_vm *vm, uint8_t arena[MEM_SIZE])
 	}
 	vm->live_counter++;
 	cursor->last_live = 0;
+}
+
+void	ld(t_cursor *cursor, uint8_t arena[MEM_SIZE])
+{
+	int		value_to_load;
+	char	registry_nb;
+	
+	value_to_load = get_value(cursor, arena, 1, -1);
+	set_carry(cursor, value_to_load);
+	registry_nb = get_value(cursor, arena, 2, NUMBER);
+	cursor->registries[-(registry_nb) - 1] = value_to_load;
+}
+
+void	st(t_cursor *cursor, uint8_t arena[MEM_SIZE])
+{
+	int		argument_one;
+	int		argument_two;
+	
+	argument_one = get_value(cursor, arena, 1, VALUE);
+	if (cursor->type_arguments[1] == T_REG)
+	{
+		argument_two = get_value(cursor, arena, 2, NUMBER);
+		cursor->registries[argument_two - 1] = argument_two;
+	}
+	else
+		argument_two = *((int *)&arena[(cursor->position + cursor->has_encoding_byte + 1) % MEM_SIZE]);
+	cursor->registries[argument_one - 1] = argument_two;
+}
+
+void	add(t_cursor *cursor, uint8_t arena[MEM_SIZE])
+{
+	char	registry_nb;
+	int		write_value;
+
+	write_value = get_value(cursor, arena, 1, VALUE) + get_value(cursor, arena, 2, VALUE);
+	registry_nb = get_value(cursor, arena, 3, NUMBER);
+	cursor->registries[registry_nb - 1] = write_value;
+	set_carry(cursor, write_value);
 }

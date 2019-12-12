@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/15 14:14:01 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/10 16:37:14 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/12 14:19:09 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 # define VM_H
 
 # define MAX_PLAYERS 4
+
+# define NUMBER 0
+# define VALUE 1
+
+# define AND 1
+# define OR 2
+# define XOR 3 
 
 # include "libft.h"
 # include <stdio.h> // remove this
@@ -66,6 +73,8 @@ typedef struct		s_cursor {
 	int				position;
 	int				jump;
 	int				registries[REG_NUMBER];
+	char			type_arguments[3];
+	int				argument_position[3];
 	uint8_t			encoding_byte;
 	char			has_encoding_byte;
 	struct s_cursor	*next;
@@ -202,5 +211,11 @@ int					validate_encoding_byte(t_cursor *cursor, uint8_t arena[MEM_SIZE]);
 
 void				move_cursor_to_next_operation(t_cursor *cursor, uint8_t arena[MEM_SIZE]);
 void				move_cursor_to_next_byte(t_cursor *cursor, uint8_t arena[MEM_SIZE]);
+
+/*
+**	get_values.c
+*/
+
+int					get_value(t_cursor *cursor, uint8_t arena[MEM_SIZE], int argument_index, int reg_use);
 
 # endif 
