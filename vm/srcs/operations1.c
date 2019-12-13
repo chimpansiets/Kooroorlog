@@ -6,13 +6,13 @@
 /*   By: svoort <marvin@codam.nl>                     +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 12:47:57 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/12 16:35:09 by avan-rei      ########   odam.nl         */
+/*   Updated: 2019/12/13 12:41:48 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void	report_player_live(t_player *players, int id)
+static void	report_player_live(t_player *players, int id)
 {
 	t_player *curr_player = players;
 	while (curr_player)
@@ -26,7 +26,7 @@ void	report_player_live(t_player *players, int id)
 	}
 }
 
-void	live(t_cursor *cursor, t_vm *vm, uint8_t arena[MEM_SIZE])
+void		live(t_cursor *cursor, t_vm *vm, uint8_t arena[MEM_SIZE])
 {
 	int				argument;
 	unsigned char	*reverse_argument;
@@ -42,7 +42,7 @@ void	live(t_cursor *cursor, t_vm *vm, uint8_t arena[MEM_SIZE])
 	cursor->last_live = 0;
 }
 
-void	ld(t_cursor *cursor, uint8_t arena[MEM_SIZE])
+void		ld(t_cursor *cursor, uint8_t arena[MEM_SIZE])
 {
 	int		load_value;
 	char	registry_nb;
@@ -53,7 +53,7 @@ void	ld(t_cursor *cursor, uint8_t arena[MEM_SIZE])
 	cursor->registries[-(registry_nb) - 1] = load_value;
 }
 
-void	st(t_cursor *cursor, uint8_t arena[MEM_SIZE])
+void		st(t_cursor *cursor, uint8_t arena[MEM_SIZE])
 {
 	int		argument_one;
 	int		argument_two;
@@ -69,7 +69,7 @@ void	st(t_cursor *cursor, uint8_t arena[MEM_SIZE])
 	cursor->registries[argument_one - 1] = argument_two;
 }
 
-void	add(t_cursor *cursor, uint8_t arena[MEM_SIZE])
+void		add(t_cursor *cursor, uint8_t arena[MEM_SIZE])
 {
 	char	registry_nb;
 	int		write_value;

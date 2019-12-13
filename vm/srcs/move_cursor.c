@@ -6,7 +6,7 @@
 /*   By: avan-rei <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 16:13:26 by avan-rei       #+#    #+#                */
-/*   Updated: 2019/12/10 15:31:09 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/13 12:26:49 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,18 @@ void	move_cursor_to_next_operation(t_cursor *cursor, uint8_t arena[MEM_SIZE])
 	i = 0;
 	while (i < op_tab[cursor->opcode - 1].amount_args)
 	{
-		if (cursor->encoding_byte)
+		if (cursor->has_encoding_byte)
 		{
 			cursor->position += get_instruction_size(cursor, arena);
 			return ;
 		}
 		else
 		{
-			if (T_REG & op_tab[2].type_args[i])
+			if (T_REG & op_tab[cursor->opcode - 1].type_args[i])
 				cursor->position += 1;
-			else if (T_DIR & op_tab[2].type_args[i])
+			else if (T_DIR & op_tab[cursor->opcode - 1].type_args[i])
 				cursor->position += op_tab[cursor->opcode - 1].label_size;
-			else if (T_IND & op_tab[2].type_args[i])
+			else if (T_IND & op_tab[cursor->opcode - 1].type_args[i])
 				cursor->position += 4;
 		}
 		i++;

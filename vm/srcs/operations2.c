@@ -6,7 +6,7 @@
 /*   By: svoort <marvin@codam.nl>                     +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 15:36:06 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/12 16:32:57 by avan-rei      ########   odam.nl         */
+/*   Updated: 2019/12/13 12:36:56 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ void	zjmp(t_cursor *cursor, uint8_t arena[MEM_SIZE])
 	cursor->position = (cursor->position + write_value % IDX_MOD) % MEM_SIZE;
 }
 
-void	ldi(t_cursor *cursor, uint8_t arena[MEM_SIZE])
-{
+// void	ldi(t_cursor *cursor, uint8_t arena[MEM_SIZE])
+// {
 	
-}
+// }
 
 void	sti(t_cursor *cursor, uint8_t arena[MEM_SIZE])
 {

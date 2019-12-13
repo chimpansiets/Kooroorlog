@@ -6,13 +6,13 @@
 /*   By: svoort <marvin@codam.nl>                     +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 15:36:10 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/12 16:34:10 by avan-rei      ########   odam.nl         */
+/*   Updated: 2019/12/13 12:41:06 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void	fork(t_vm *vm, t_cursor *cursor, uint8_t arena[MEM_SIZE])
+void	fork_corewar(t_vm *vm, t_cursor *cursor, uint8_t arena[MEM_SIZE])
 {
 	t_cursor	*new;
 	int			write_value;
@@ -23,15 +23,15 @@ void	fork(t_vm *vm, t_cursor *cursor, uint8_t arena[MEM_SIZE])
 	lstadd_cursor(&(vm->cursors), new);
 }
 
-void	lld(t_cursor *cursor, uint8_t arena[MEM_SIZE])
-{
+// void	lld(t_cursor *cursor, uint8_t arena[MEM_SIZE])
+// {
 
-}
+// }
 
-void	lldi(t_cursor *cursor, uint8_t arena[MEM_SIZE])
-{
+// void	lldi(t_cursor *cursor, uint8_t arena[MEM_SIZE])
+// {
 
-}
+// }
 
 void	lfork(t_vm *vm, t_cursor *cursor, uint8_t arena[MEM_SIZE])
 {

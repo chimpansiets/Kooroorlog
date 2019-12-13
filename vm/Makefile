@@ -6,7 +6,7 @@
 #    By: svoort <svoort@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/08/15 12:17:02 by svoort         #+#    #+#                 #
-#    Updated: 2019/12/11 12:28:37 by svoort        ########   odam.nl          #
+#    Updated: 2019/12/13 12:44:20 by svoort        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SRC		= vm.c error.c cw_lstadd.c cw_lstnew.c read_checks.c\
 			player_checks.c cursor_checks.c cw_lstrem.c op_tab.c \
 			cursor_operations.c operation_checks.c move_cursor.c \
 			execute_operations.c operations1.c reverse_bytes.c \
-			get_values.c #operations2.c operations3.c
+			get_values.c operations2.c operations3.c
 
 OBJ		= $(addprefix srcs/,$(SRC:.c=.o))
 

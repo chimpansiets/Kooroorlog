@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 14:31:16 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/12 14:19:02 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/13 12:30:16 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,34 @@ void		assign_new_opcode(t_cursor *cursor, uint8_t arena[MEM_SIZE])
 	cursor->wait_cycles = op_tab[cursor->opcode - 1].wait_cycles;
 }
 
+static void	reset_cursor(t_cursor *cursor)
+{
+	cursor->argument_position[0] = 0;
+	cursor->argument_position[1] = 0;
+	cursor->argument_position[2] = 0;
+	cursor->type_arguments[0] = 0;
+	cursor->type_arguments[1] = 0;
+	cursor->type_arguments[2] = 0;
+	cursor->has_encoding_byte = 0;
+	cursor->encoding_byte = 0;
+	cursor->wait_cycles = -1;
+}
+
 void		check_operation(t_vm *vm, t_cursor *cursor, uint8_t arena[MEM_SIZE])
 {
+	int		ret_encoding_bytuh;
+	int		ret_reg;
+	
 	if (is_valid_operation(cursor, arena))
 	{
 		if (cursor->wait_cycles == -1)
-		{
 			assign_new_opcode(cursor, arena);
-			ft_printf("%s: wait_cycles: %i\n", op_tab[cursor->opcode - 1].op_name, cursor->wait_cycles);
-		}
-		if (cursor->wait_cycles == 0 && validate_encoding_byte(cursor, arena) && validate_registry_numbers(cursor, arena))
+		if (cursor->wait_cycles == 0 && (ret_encoding_bytuh = validate_encoding_byte(cursor, arena)) && \
+			initialize_argument_pos(cursor) && (ret_reg = validate_registry_numbers(cursor, arena)))
 		{
-			initialize_argument_pos(cursor);
 			execute_operations(vm, cursor, arena);
 			move_cursor_to_next_operation(cursor, arena);
-			cursor->wait_cycles = -1;
+			reset_cursor(cursor);
 			return ;
 		}
 		else if (cursor->wait_cycles == 0)

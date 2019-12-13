@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/15 14:14:01 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/12 14:19:09 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/13 12:43:39 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,6 +216,34 @@ void				move_cursor_to_next_byte(t_cursor *cursor, uint8_t arena[MEM_SIZE]);
 **	get_values.c
 */
 
-int					get_value(t_cursor *cursor, uint8_t arena[MEM_SIZE], int argument_index, int reg_use);
+int					initialize_argument_pos(t_cursor *cursor);
+int					get_value(t_cursor *cursor, uint8_t arena[MEM_SIZE], int argument_nb, int to_truncate);
+void				set_carry(t_cursor *cursor, int write_value);
 
-# endif 
+/*
+**	operations1.c
+*/
+
+void				live(t_cursor *cursor, t_vm *vm, uint8_t arena[MEM_SIZE]);
+void				ld(t_cursor *cursor, uint8_t arena[MEM_SIZE]);
+void				st(t_cursor *cursor, uint8_t arena[MEM_SIZE]);
+void				add(t_cursor *cursor, uint8_t arena[MEM_SIZE]);
+
+/*
+**	operations2.c
+*/
+
+void				sub(t_cursor *cursor, uint8_t arena[MEM_SIZE]);
+void				and_or_xor(t_cursor *cursor, uint8_t arena[MEM_SIZE], int bitwise);
+void				zjmp(t_cursor *cursor, uint8_t arena[MEM_SIZE]);
+void				sti(t_cursor *cursor, uint8_t arena[MEM_SIZE]);
+
+/*
+**	operations3.c
+*/
+
+void				fork_corewar(t_vm *vm, t_cursor *cursor, uint8_t arena[MEM_SIZE]);
+void				lfork(t_vm *vm, t_cursor *cursor, uint8_t arena[MEM_SIZE]);
+void				aff(t_cursor *cursor, uint8_t arena[MEM_SIZE]);
+
+# endif

@@ -6,7 +6,7 @@
 /*   By: avan-rei <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 11:28:37 by avan-rei       #+#    #+#                */
-/*   Updated: 2019/12/10 12:17:45 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/13 11:29:17 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int				check(t_vm *vm)
 	}
 	else if (vm->check_counter >= MAX_CHECKS)
 	{
-		ft_printf("check_counter: %i\n", vm->check_counter);
 		decrease_cycles_to_die(vm);
 		vm->check_counter = 1;
 	}
