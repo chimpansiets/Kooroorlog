@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 15:23:56 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/13 12:21:35 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/13 16:56:05 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,19 +63,20 @@ static int	bit_shift_gedoe(t_cursor *cursor, int encoding_byte, char op_index)
 		encoding_byte = encoding_byte >> 2;
 		if ((encoding_byte & 3) == 3)
 		{
-			if ((op_tab[op_index].type_args[i] & T_IND) != T_IND)
+			if ((i >= op_tab[op_index].amount_args) || (op_tab[op_index].type_args[i] & T_IND) != T_IND)
 				return (0);
 			cursor->type_arguments[i] = T_IND;
+			ft_printf("moet: %i\n", cursor->type_arguments[i]);
 		}
 		else if ((encoding_byte & 2) == 2)
 		{
-			if ((op_tab[op_index].type_args[i] & T_DIR) != T_DIR)
+			if ((i >= op_tab[op_index].amount_args) || (op_tab[op_index].type_args[i] & T_DIR) != T_DIR)
 				return (0);
 			cursor->type_arguments[i] = T_DIR;
 		}
 		else if ((encoding_byte & 1) == 1)
 		{
-			if ((op_tab[op_index].type_args[i] & T_REG) != T_REG)
+			if ((i >= op_tab[op_index].amount_args) || (op_tab[op_index].type_args[i] & T_REG) != T_REG)
 				return (0);
 			cursor->type_arguments[i] = T_REG;
 		}
@@ -94,7 +95,7 @@ int		validate_encoding_byte(t_cursor *cursor, uint8_t arena[MEM_SIZE])
 		cursor->encoding_byte = arena[(cursor->position + 1) % MEM_SIZE];
 		if (cursor->encoding_byte & 3)
 			return (0);
-		if (!(bit_shift_gedoe(cursor, cursor->encoding_byte, arena[cursor->position % MEM_SIZE] - 1)))
+		if (!(bit_shift_gedoe(cursor, cursor->encoding_byte, arena[cursor->position] - 1)))
 			return (0);
 		cursor->has_encoding_byte = 1;
 	}

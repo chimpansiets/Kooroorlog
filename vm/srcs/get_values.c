@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/11 12:28:22 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/13 12:30:27 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/13 16:49:21 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,17 +81,19 @@ int		get_value(t_cursor *cursor, uint8_t arena[MEM_SIZE], int argument_nb, int t
 	if (cursor->type_arguments[argument_nb - 1] == T_DIR)
 	{
 		if (label_size == 2)
-			return ((int)(*((short *)&arena[(cursor->position + 1 + cursor->has_encoding_byte) % MEM_SIZE])));
+			return ((int)(*((short *)&arena[(cursor->position + cursor->argument_position[argument_nb - 1] + cursor->has_encoding_byte) % MEM_SIZE])));
 		else
-			return ((int)(*((int *)&arena[(cursor->position + 1 + cursor->has_encoding_byte) % MEM_SIZE])));
+			return ((int)(*((int *)&arena[(cursor->position + cursor->argument_position[argument_nb - 1] + cursor->has_encoding_byte) % MEM_SIZE])));
 	}
 	else if (cursor->type_arguments[argument_nb - 1] == T_IND)
 	{
-		offset = *(int *)&arena[(cursor->position)];
+		offset = reverse_bytes(*(int *)&arena[(cursor->position + cursor->argument_position[argument_nb - 1] + cursor->has_encoding_byte) % MEM_SIZE]);
+		ft_printf("offset: %i\n", offset);
 		if (to_truncate == 1)
-		{
-			return (0);
-		}
+			return (*(int *)&arena[(cursor->position + (offset % IDX_MOD)) % MEM_SIZE]);
+		else
+			return (*(int *)&arena[(cursor->position + offset) % MEM_SIZE]);
 	}
-	return (0);
+	else
+		return (cursor->registries[arena[(cursor->position + cursor->has_encoding_byte + cursor->argument_position[argument_nb - 1]) % MEM_SIZE]]);
 }

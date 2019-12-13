@@ -6,7 +6,7 @@
 /*   By: svoort <marvin@codam.nl>                     +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 12:47:57 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/13 12:41:48 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/13 16:57:55 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static void	report_player_live(t_player *players, int id)
 	}
 }
 
+//works
 void		live(t_cursor *cursor, t_vm *vm, uint8_t arena[MEM_SIZE])
 {
 	int				argument;
@@ -42,15 +43,17 @@ void		live(t_cursor *cursor, t_vm *vm, uint8_t arena[MEM_SIZE])
 	cursor->last_live = 0;
 }
 
+//weird stuff
 void		ld(t_cursor *cursor, uint8_t arena[MEM_SIZE])
 {
 	int		load_value;
 	char	registry_nb;
 	
-	load_value = get_value(cursor, arena, 1, -1);
+	load_value = get_value(cursor, arena, 1, TRUNCATE);
+	ft_printf("load_value: %i\n", load_value);
 	set_carry(cursor, load_value);
-	registry_nb = get_value(cursor, arena, 2, NUMBER);
-	cursor->registries[-(registry_nb) - 1] = load_value;
+	registry_nb = arena[cursor->position + cursor->has_encoding_byte + cursor->argument_position[1]];
+	cursor->registries[registry_nb - 1] = load_value;
 }
 
 void		st(t_cursor *cursor, uint8_t arena[MEM_SIZE])

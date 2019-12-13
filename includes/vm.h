@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/15 14:14:01 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/13 12:43:39 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/13 16:19:22 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,11 @@
 
 # define AND 1
 # define OR 2
-# define XOR 3 
+# define XOR 3
+
+# define TRUNCATE_UNDEFINED -1
+# define NO_TRUNCATE 0
+# define TRUNCATE 1
 
 # include "libft.h"
 # include <stdio.h> // remove this
