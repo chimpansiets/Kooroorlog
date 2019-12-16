@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/15 14:14:01 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/16 12:25:54 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/16 16:53:48 by avan-rei      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # define MAX_PLAYERS 4
 
 # define NUMBER 0
-# define VALUE 1
+# define NO_TRUNCATEVALUE 1
 
 # define AND 1
 # define OR 2
@@ -112,7 +112,7 @@ void				check_files(t_vm *vm);
 void				player_introduction(t_vm *vm);
 void				execute_operations(t_vm *vm, t_cursor *cursor, uint8_t arena[MEM_SIZE]);
 int					reverse_bytes(int nb);
-int					reverse_2bytes(int nb);
+short				reverse_2bytes(short nb);
 
 /*
 **	live.c
@@ -241,6 +241,7 @@ void				add(t_cursor *cursor, uint8_t arena[MEM_SIZE]);
 void				sub(t_cursor *cursor, uint8_t arena[MEM_SIZE]);
 void				and_or_xor(t_cursor *cursor, uint8_t arena[MEM_SIZE], int bitwise);
 void				zjmp(t_cursor *cursor, uint8_t arena[MEM_SIZE]);
+void				ldi(t_cursor *cursor, uint8_t arena[MEM_SIZE]);
 void				sti(t_cursor *cursor, uint8_t arena[MEM_SIZE]);
 
 /*
@@ -248,7 +249,15 @@ void				sti(t_cursor *cursor, uint8_t arena[MEM_SIZE]);
 */
 
 void				fork_corewar(t_vm *vm, t_cursor *cursor, uint8_t arena[MEM_SIZE]);
+void				lld(t_cursor *cursor, uint8_t arena[MEM_SIZE]);
+void				lldi(t_cursor *cursor, uint8_t arena[MEM_SIZE]);
 void				lfork(t_vm *vm, t_cursor *cursor, uint8_t arena[MEM_SIZE]);
 void				aff(t_cursor *cursor, uint8_t arena[MEM_SIZE]);
+
+/*
+**	ft_memcpy_corewar.c
+*/
+
+void				*ft_memcpy_corewar(uint8_t arena[MEM_SIZE], int position, void *to_write, int size);
 
 # endif
