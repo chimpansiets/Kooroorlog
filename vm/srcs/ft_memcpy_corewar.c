@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   the_battle.c                                       :+:    :+:            */
+/*   ft_memcpy_corewar.c                                :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: svoort <svoort@student.codam.nl>             +#+                     */
+/*   By: svoort <marvin@codam.nl>                     +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/12/04 16:25:47 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/16 17:39:31 by svoort        ########   odam.nl         */
+/*   Created: 2019/12/16 16:28:55 by svoort         #+#    #+#                */
+/*   Updated: 2019/12/16 16:54:35 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void		the_battle(t_vm *vm)
-{
-	int		i;
+//CHESCO'S MEMMOVE
 
-	print_mem(vm->arena);
-	while (check(vm) == 1)
+void	*ft_memcpy_corewar(uint8_t arena[MEM_SIZE], int position, void *to_write, int size)
+{
+	int i;
+	unsigned char *cpy;
+
+	cpy = to_write;
+	i = 0;
+	while(i < size)
 	{
-		i = 0;
-		while (i < vm->cycles_to_die)
-		{
-			execute_cursors(vm);
-			i++;
-		}
-		print_mem(vm->arena);
-		vm->check_counter++;
+		arena[position % MEM_SIZE] = cpy[i];
+		i++;
 	}
-	ft_printf("player %i wins", vm->last_alive);
+	return (&arena[position]);
 }

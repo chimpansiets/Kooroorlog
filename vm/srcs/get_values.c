@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/11 12:28:22 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/16 12:26:01 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/16 17:38:40 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ int		initialize_argument_pos(t_cursor *cursor)
 			offset += 2;
 		i++;
 	}
-	// ft_printf("cursor_instruction: %s\n", op_tab[cursor->opcode - 1].op_name);
-	// ft_printf("cursor %i: %i, %i, %i\n", cursor->id, cursor->argument_position[0], cursor->argument_position[1], cursor->argument_position[2]);
 	return (1);
 }
 

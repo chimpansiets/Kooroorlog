@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 14:31:16 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/16 12:10:25 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/16 16:41:23 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,10 @@ void		check_operation(t_vm *vm, t_cursor *cursor, uint8_t arena[MEM_SIZE])
 		}
 		else if (cursor->wait_cycles == 0)
 		{
+			// ft_printf("ret_encodo: %i, ret_reg: %i\n", ret_encoding_bytuh, ret_reg);
 			move_cursor_to_next_byte(cursor, arena);
 			reset_cursor(cursor);
+			return ;
 		}
 	}
 	if (cursor->wait_cycles == -1)
@@ -108,6 +110,6 @@ void		execute_cursors(t_vm *vm)
 		to_execute = to_execute->next;
 	}
 	vm->cycle_counter++;
-	//print_cursor_pos(vm->cursors);
+	// print_cursor_pos(vm->cursors);
 	check_dump(vm);
 }

@@ -6,7 +6,7 @@
 /*   By: svoort <marvin@codam.nl>                     +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 12:30:14 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/13 12:44:09 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/16 17:37:26 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,16 @@ void		execute_operations(t_vm *vm, t_cursor *cursor, uint8_t arena[MEM_SIZE])
 		and_or_xor(cursor, arena, XOR);
 	else if (Opekōdo == 9)
 		zjmp(cursor, arena);
-	// else if (Opekōdo == 10)
-	// 	ldi();
-	// else if (Opekōdo == 11)
-	// 	sti();
+	else if (Opekōdo == 10)
+		ldi(cursor, arena);
+	else if (Opekōdo == 11)
+		sti(cursor, arena);
 	else if (Opekōdo == 12)
 		fork_corewar(vm, cursor, arena);
-	// else if (Opekōdo == 13)
-	// 	lld();
-	// else if (Opekōdo == 14)
-	// 	lldi();
+	else if (Opekōdo == 13)
+		lld(cursor, arena);
+	else if (Opekōdo == 14)
+		lldi(cursor, arena);
 	else if (Opekōdo == 15)
 		lfork(vm, cursor, arena);		
 	else if (Opekōdo == 16)

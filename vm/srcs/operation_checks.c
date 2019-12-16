@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 15:23:56 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/16 12:27:54 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/16 14:07:58 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,14 @@ int		validate_registry_numbers(t_cursor *cursor, uint8_t arena[MEM_SIZE])
 	{
 		if (cursor->has_encoding_byte)
 		{
-			if (T_REG & (cursor->encoding_byte >> (6 - (i * 2))))
+			if (T_REG & (cursor->encoding_byte >> (6 - (i * 2))) && ((2 & (cursor->encoding_byte >> (6 - (i * 2)))) == 0))
 			{
 				reg_number = arena[(cursor->position + cursor->has_encoding_byte + cursor->argument_position[i]) % MEM_SIZE];
 				if (reg_number < 1 || REG_NUMBER < reg_number)
+				{
+					ft_printf("hier%i\n", reg_number);
 					return (0);
+				}
 			}
 		}
 		else if (T_REG & op_tab[cursor->opcode - 1].type_args[i])

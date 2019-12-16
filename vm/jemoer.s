@@ -5,5 +5,5 @@ loop:
         sti r1, %:live, %1
 live:
         live %1
-        ld -5, r2
+        st r1, 100
         zjmp %:loop

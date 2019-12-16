@@ -6,7 +6,7 @@
 /*   By: svoort <marvin@codam.nl>                     +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 12:47:57 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/16 11:59:42 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/16 17:02:07 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ void		live(t_cursor *cursor, t_vm *vm, uint8_t arena[MEM_SIZE])
 
 	argument = *((int *)&arena[cursor->position + 1 % MEM_SIZE]);
 	argument = reverse_bytes(argument);
+	ft_printf("%i\n", argument);
 	if (-(vm->total_players) <= argument && argument <= -1)
 	{
 		report_player_live(vm->players, argument);
 		vm->last_alive = argument;
 	}
 	vm->live_counter++;
-	cursor->last_live = 0;
 }
 
 //weird stuff
@@ -49,9 +49,7 @@ void		ld(t_cursor *cursor, uint8_t arena[MEM_SIZE])
 	int		load_value;
 	char	registry_nb;
 	
-	ft_printf("pos: %i\n", cursor->position);
 	load_value = get_value(cursor, arena, 1, TRUNCATE);
-	ft_printf("load_value: %i\n", load_value);
 	set_carry(cursor, load_value);
 	registry_nb = arena[cursor->position + cursor->has_encoding_byte + cursor->argument_position[1]];
 	cursor->registries[registry_nb - 1] = load_value;
@@ -59,27 +57,34 @@ void		ld(t_cursor *cursor, uint8_t arena[MEM_SIZE])
 
 void		st(t_cursor *cursor, uint8_t arena[MEM_SIZE])
 {
-	int		argument_one;
-	int		argument_two;
+	short	argument_two;
+	int 	to_store;
 
-	argument_one = get_value(cursor, arena, 1, VALUE);
+	to_store = get_value(cursor, arena, 1, TRUNCATE_UNDEFINED);
 	if (cursor->type_arguments[1] == T_REG)
 	{
-		argument_two = get_value(cursor, arena, 2, NUMBER);
-		cursor->registries[argument_two - 1] = argument_two;
+		argument_two = arena[cursor->position + cursor->has_encoding_byte + cursor->argument_position[1]];
+		cursor->registries[argument_two - 1] = to_store;
 	}
 	else
-		argument_two = *((int *)&arena[(cursor->position + cursor->has_encoding_byte + 1) % MEM_SIZE]);
-	cursor->registries[argument_one - 1] = argument_two;
+	{
+		argument_two = *((short *)&arena[(cursor->position + cursor->has_encoding_byte + cursor->argument_position[1]) % MEM_SIZE]);
+		argument_two = reverse_2bytes(argument_two) % IDX_MOD;
+		ft_memcpy_corewar(arena, argument_two, &to_store, 4);
+	}
 }
 
 void		add(t_cursor *cursor, uint8_t arena[MEM_SIZE])
 {
 	char	registry_nb;
+	int		value1;
+	int		value2;
 	int		write_value;
 
-	write_value = get_value(cursor, arena, 1, VALUE) + get_value(cursor, arena, 2, VALUE);
-	registry_nb = get_value(cursor, arena, 3, NUMBER);
-	cursor->registries[registry_nb - 1] = write_value;
+	value1 = reverse_bytes(get_value(cursor, arena, 1, TRUNCATE_UNDEFINED));
+	value2 = reverse_bytes(get_value(cursor, arena, 2, TRUNCATE_UNDEFINED));
+	write_value = value1 + value2;
+	registry_nb = arena[cursor->position + cursor->has_encoding_byte + cursor->argument_position[2]];
+	cursor->registries[registry_nb - 1] = reverse_bytes(write_value);
 	set_carry(cursor, write_value);
 }

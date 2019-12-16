@@ -6,36 +6,32 @@
 /*   By: svoort <marvin@codam.nl>                     +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 15:25:12 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/16 12:25:21 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/16 16:40:50 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-int		reverse_2bytes(int nb)
+short	reverse_2bytes(short nb)
 {
-	int one;
-	int two;
+	unsigned char	*nb_addr;
+	unsigned char	reverse_nb[2];
 
-	one = nb >> 8;
-	two = nb << 8;
-	return (one + two);
+	nb_addr = (unsigned char *)&nb;
+	reverse_nb[0] = nb_addr[1];
+	reverse_nb[1] = nb_addr[0];
+	return (*(short *)&reverse_nb[0]);
 }
 
 int		reverse_bytes(int nb)
 {
-	int one;
-	int two;
-	int three;
-	int four;
+	unsigned char	*nb_addr;
+	unsigned char	reverse_nb[4];
 
-	one = nb >> 24;
-	two = nb << 8;
-	two = two >> 24;
-	two = two << 8;
-	three = nb << 16;
-	three = three >> 24;
-	three = three << 16;
-	four = nb << 24;
-	return (one + two + three + four);
+	nb_addr = (unsigned char *)&nb;
+	reverse_nb[0] = nb_addr[3];
+	reverse_nb[1] = nb_addr[2];
+	reverse_nb[2] = nb_addr[1];
+	reverse_nb[3] = nb_addr[0];
+	return (*(int *)reverse_nb);
 }

@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 15:37:01 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/16 12:24:55 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/16 14:33:27 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ int		reverse_bytes(int nb)
 
 int	main(void)
 {
+	short	nb;
+
+	nb = 0xFFBF;
 	printf("%i\n", reverse_bytes((short)3));
 	return (0);
 }
