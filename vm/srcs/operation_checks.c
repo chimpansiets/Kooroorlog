@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 15:23:56 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/13 16:56:05 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/16 12:27:54 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ static int	bit_shift_gedoe(t_cursor *cursor, int encoding_byte, char op_index)
 			if ((i >= op_tab[op_index].amount_args) || (op_tab[op_index].type_args[i] & T_IND) != T_IND)
 				return (0);
 			cursor->type_arguments[i] = T_IND;
-			ft_printf("moet: %i\n", cursor->type_arguments[i]);
 		}
 		else if ((encoding_byte & 2) == 2)
 		{

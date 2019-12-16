@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/11 12:28:22 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/13 16:49:21 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/16 12:26:01 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		initialize_argument_pos(t_cursor *cursor)
 		else if (cursor->type_arguments[i] == T_DIR)
 			offset += op_tab[cursor->opcode - 1].label_size;
 		else if (cursor->type_arguments[i] == T_IND)
-			offset += 4;
+			offset += 2;
 		i++;
 	}
 	// ft_printf("cursor_instruction: %s\n", op_tab[cursor->opcode - 1].op_name);
@@ -74,8 +74,8 @@ void	set_carry(t_cursor *cursor, int write_value)
 
 int		get_value(t_cursor *cursor, uint8_t arena[MEM_SIZE], int argument_nb, int to_truncate)
 {
-	int label_size;
-	int offset;
+	int 	label_size;
+	short	offset;
 
 	label_size = op_tab[cursor->opcode - 1].label_size;
 	if (cursor->type_arguments[argument_nb - 1] == T_DIR)
@@ -87,8 +87,7 @@ int		get_value(t_cursor *cursor, uint8_t arena[MEM_SIZE], int argument_nb, int t
 	}
 	else if (cursor->type_arguments[argument_nb - 1] == T_IND)
 	{
-		offset = reverse_bytes(*(int *)&arena[(cursor->position + cursor->argument_position[argument_nb - 1] + cursor->has_encoding_byte) % MEM_SIZE]);
-		ft_printf("offset: %i\n", offset);
+		offset = reverse_2bytes(*(short *)&arena[(cursor->position + cursor->argument_position[argument_nb - 1] + cursor->has_encoding_byte) % MEM_SIZE]);
 		if (to_truncate == 1)
 			return (*(int *)&arena[(cursor->position + (offset % IDX_MOD)) % MEM_SIZE]);
 		else

@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/15 14:14:01 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/13 16:19:22 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/16 12:25:54 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ void				check_files(t_vm *vm);
 void				player_introduction(t_vm *vm);
 void				execute_operations(t_vm *vm, t_cursor *cursor, uint8_t arena[MEM_SIZE]);
 int					reverse_bytes(int nb);
+int					reverse_2bytes(int nb);
 
 /*
 **	live.c

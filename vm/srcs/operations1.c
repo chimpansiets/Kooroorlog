@@ -6,7 +6,7 @@
 /*   By: svoort <marvin@codam.nl>                     +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 12:47:57 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/13 16:57:55 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/16 11:59:42 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void		ld(t_cursor *cursor, uint8_t arena[MEM_SIZE])
 	int		load_value;
 	char	registry_nb;
 	
+	ft_printf("pos: %i\n", cursor->position);
 	load_value = get_value(cursor, arena, 1, TRUNCATE);
 	ft_printf("load_value: %i\n", load_value);
 	set_carry(cursor, load_value);

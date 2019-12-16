@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 14:31:16 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/13 16:55:12 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/16 12:10:25 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void		assign_new_opcode(t_cursor *cursor, uint8_t arena[MEM_SIZE])
 
 static void	reset_cursor(t_cursor *cursor)
 {
+	cursor->opcode = 0;
 	cursor->argument_position[0] = 0;
 	cursor->argument_position[1] = 0;
 	cursor->argument_position[2] = 0;
@@ -51,10 +52,16 @@ void		check_operation(t_vm *vm, t_cursor *cursor, uint8_t arena[MEM_SIZE])
 			return ;
 		}
 		else if (cursor->wait_cycles == 0)
+		{
 			move_cursor_to_next_byte(cursor, arena);
+			reset_cursor(cursor);
+		}
 	}
 	if (cursor->wait_cycles == -1)
+	{
 		move_cursor_to_next_byte(cursor, arena);
+		reset_cursor(cursor);
+	}
 	return ;
 }
 
