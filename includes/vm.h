@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/15 14:14:01 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/16 16:53:48 by avan-rei      ########   odam.nl         */
+/*   Updated: 2019/12/17 14:43:39 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,7 @@ void				arena_initialization(t_vm *vm);
 **	print_mem.c
 */
 
-void				print_mem(uint8_t *mem);
+void				print_mem(t_vm *vm);
 
 /*
 **	memory_placement.c

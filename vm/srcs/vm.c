@@ -6,7 +6,7 @@
 /*   By: avan-rei <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/02 15:13:28 by avan-rei       #+#    #+#                */
-/*   Updated: 2019/12/09 15:52:04 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/17 16:05:33 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		main(int argc, char **argv)
 	save_players(vm, argc, argv);
 	calc_position(vm);
 	check_files(vm);
-	print_players(vm);
+	// print_players(vm);
 	player_introduction(vm);
 	arena_initialization(vm);
 	the_battle(vm);

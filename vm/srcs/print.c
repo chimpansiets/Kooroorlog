@@ -6,7 +6,7 @@
 /*   By: avan-rei <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/03 13:59:21 by avan-rei       #+#    #+#                */
-/*   Updated: 2019/12/10 12:28:23 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/17 16:07:07 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	player_introduction(t_vm *vm)
 	{
 		if (current->id == id)
 		{
-			ft_printf("* Player %i, weighing ' ' bytes, %s\n", id, current->champ_name); //current->comment nog erbij
+			ft_printf("* Player %i, weighing %i bytes, %s\n", id, current->ex_code_size, current->champ_name); //current->comment nog erbij
 			current = vm->players;
 			id++;
 		}

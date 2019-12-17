@@ -6,7 +6,7 @@
 /*   By: avan-rei <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 12:55:30 by avan-rei       #+#    #+#                */
-/*   Updated: 2019/12/11 19:08:17 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/17 16:55:27 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,6 @@ t_cursor	*lstnew_cursor(t_player *player)
 	new->id = player->id;
 	new->position = player->position;
 	new->wait_cycles = -1;
-	new->registries[0] = -(player->id);
+	new->registries[0] = reverse_bytes(-(player->id));
 	return (new);
 }

@@ -6,7 +6,7 @@
 /*   By: svoort <marvin@codam.nl>                     +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 12:30:14 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/16 18:27:27 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/17 16:53:00 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void		execute_operations(t_vm *vm, t_cursor *cursor, uint8_t arena[MEM_SIZE])
 	int Opekōdo;
 
 	Opekōdo = cursor->opcode;
-	if (Opekōdo == 1)
+	if (Opekōdo == 1) //werktoo
 		live(cursor, vm, arena);
 	else if (Opekōdo == 2)
 		ld(cursor, arena);
@@ -27,17 +27,17 @@ void		execute_operations(t_vm *vm, t_cursor *cursor, uint8_t arena[MEM_SIZE])
 		add(cursor, arena);
 	else if (Opekōdo == 5)
 		sub(cursor, arena);
-	else if (Opekōdo == 6)
+	else if (Opekōdo == 6) // werkto
 		and_or_xor(cursor, arena, AND);
-	else if (Opekōdo == 7)
+	else if (Opekōdo == 7) // workso
 		and_or_xor(cursor, arena, OR);
-	else if (Opekōdo == 8)
+	else if (Opekōdo == 8) // werktko
 		and_or_xor(cursor, arena, XOR);
-	else if (Opekōdo == 9)
+	else if (Opekōdo == 9) // werktoe
 		zjmp(cursor, arena);
 	else if (Opekōdo == 10)
 		ldi(cursor, arena);
-	else if (Opekōdo == 11)
+	else if (Opekōdo == 11) // werktuh
 		sti(cursor, arena);
 	else if (Opekōdo == 12)
 		fork_corewar(vm, cursor, arena);

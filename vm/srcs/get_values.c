@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/11 12:28:22 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/16 18:27:29 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/17 14:43:59 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,5 @@ int		get_value(t_cursor *cursor, uint8_t arena[MEM_SIZE], int argument_nb, int t
 			return (*(int *)&arena[(cursor->position + offset) % MEM_SIZE]);
 	}
 	else
-		return (cursor->registries[arena[(cursor->position + cursor->has_encoding_byte + cursor->argument_position[argument_nb - 1]) % MEM_SIZE]]);
+		return (cursor->registries[arena[(cursor->position + cursor->has_encoding_byte + cursor->argument_position[argument_nb - 1]) % MEM_SIZE] - 1]);
 }

@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/04 16:25:47 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/16 18:27:26 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/17 17:29:05 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 void		the_battle(t_vm *vm)
 {
 	int		i;
+	int		ctr;
 
-	print_mem(vm->arena);
+	ctr = 0;
+	// print_mem(vm->arena);
 	while (check(vm) == 1)
 	{
 		i = 0;
@@ -25,8 +27,8 @@ void		the_battle(t_vm *vm)
 			execute_cursors(vm);
 			i++;
 		}
-		print_mem(vm->arena);
 		vm->check_counter++;
 	}
-	ft_printf("player %i wins", vm->last_alive);
+	// print_mem(vm->arena);
+	ft_printf("player %i wins\n", -(vm->last_alive));
 }

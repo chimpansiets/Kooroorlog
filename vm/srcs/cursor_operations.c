@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 14:31:16 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/16 18:27:33 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/17 16:57:46 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ extern		t_op	op_tab[17];
 void		assign_new_opcode(t_cursor *cursor, uint8_t arena[MEM_SIZE])
 {
 	cursor->opcode = arena[cursor->position % MEM_SIZE];
-	cursor->wait_cycles = op_tab[cursor->opcode - 1].wait_cycles;
+	cursor->wait_cycles = op_tab[cursor->opcode - 1].wait_cycles - 1;
 }
 
 static void	reset_cursor(t_cursor *cursor)
@@ -46,8 +46,10 @@ void		check_operation(t_vm *vm, t_cursor *cursor, uint8_t arena[MEM_SIZE])
 		if (cursor->wait_cycles == 0 && (ret_encoding_bytuh = validate_encoding_byte(cursor, arena)) && \
 			initialize_argument_pos(cursor) && (ret_reg = validate_registry_numbers(cursor, arena)))
 		{
+			// ft_printf("%i\n", cursor->wait_cycles);
 			execute_operations(vm, cursor, arena);
-			move_cursor_to_next_operation(cursor, arena);
+			if (cursor->opcode != 9)
+				move_cursor_to_next_operation(cursor, arena);
 			reset_cursor(cursor);
 			return ;
 		}
@@ -78,7 +80,7 @@ void		check_dump(t_vm *vm)
 	vm->dump_flag--;
 	if (vm->dump_flag == 0)
 	{
-		print_mem(vm->arena);
+		print_mem(vm);
 		exit(0);
 	}
 }
@@ -110,6 +112,6 @@ void		execute_cursors(t_vm *vm)
 		to_execute = to_execute->next;
 	}
 	vm->cycle_counter++;
-	// print_cursor_pos(vm->cursors);
+	//print_cursor_pos(vm->cursors);
 	check_dump(vm);
 }

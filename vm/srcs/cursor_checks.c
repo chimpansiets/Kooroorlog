@@ -6,7 +6,7 @@
 /*   By: avan-rei <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 11:28:37 by avan-rei       #+#    #+#                */
-/*   Updated: 2019/12/13 11:29:17 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/17 14:44:02 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ static int		check_dead_cursor(t_vm *vm)
 			rm_cursor(&(vm->cursors), current);
 		current = tmp;
 	}
-	print_cursor(vm);
 	if (vm->cursors == NULL)
 		return (0);
 	return (1);

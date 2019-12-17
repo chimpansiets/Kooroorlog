@@ -6,7 +6,7 @@
 /*   By: svoort <marvin@codam.nl>                     +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 12:47:57 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/16 17:02:07 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/17 17:28:00 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,14 @@
 
 static void	report_player_live(t_player *players, int id)
 {
-	t_player *curr_player = players;
+	t_player *curr_player;
+	
+	curr_player = players;
 	while (curr_player)
 	{
-		if (curr_player->id == id)
+		if (-(curr_player->id) == id)
 		{
+			// ft_printf("reporto: %i\n", id);
 			curr_player->last_alive = 0;
 			return ;
 		}
@@ -26,24 +29,22 @@ static void	report_player_live(t_player *players, int id)
 	}
 }
 
-//works
 void		live(t_cursor *cursor, t_vm *vm, uint8_t arena[MEM_SIZE])
 {
 	int				argument;
 	unsigned char	*reverse_argument;
 
-	argument = *((int *)&arena[cursor->position + 1 % MEM_SIZE]);
+	argument = *((int *)&arena[(cursor->position + 1) % MEM_SIZE]);
 	argument = reverse_bytes(argument);
-	ft_printf("%i\n", argument);
 	if (-(vm->total_players) <= argument && argument <= -1)
 	{
 		report_player_live(vm->players, argument);
 		vm->last_alive = argument;
 	}
+	cursor->last_live = 0;
 	vm->live_counter++;
 }
 
-//weird stuff
 void		ld(t_cursor *cursor, uint8_t arena[MEM_SIZE])
 {
 	int		load_value;
@@ -70,7 +71,7 @@ void		st(t_cursor *cursor, uint8_t arena[MEM_SIZE])
 	{
 		argument_two = *((short *)&arena[(cursor->position + cursor->has_encoding_byte + cursor->argument_position[1]) % MEM_SIZE]);
 		argument_two = reverse_2bytes(argument_two) % IDX_MOD;
-		ft_memcpy_corewar(arena, argument_two, &to_store, 4);
+		ft_memcpy_corewar(arena, cursor->position + argument_two, &to_store, 4);
 	}
 }
 

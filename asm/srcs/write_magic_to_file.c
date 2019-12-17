@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/11/12 16:48:04 by svoort         #+#    #+#                */
-/*   Updated: 2019/11/27 16:06:26 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/17 14:43:46 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,7 @@ void		write_champ_name(t_file in, t_file out)
 	extra_null_bytes = 4;
 	name_of_champ = ft_memalloc(sizeof(char) * PROG_NAME_LENGTH + extra_null_bytes + 1);
 	if (!(name_component = find_champ_name(in.components)))
-	{
-		ft_printf("hoi2\n");
 		print_error(name_missing, Err, NULL);
-	}
 	ft_strcat(name_of_champ, name_component->str);
 	write(out.fd, name_of_champ, PROG_NAME_LENGTH + extra_null_bytes);
 }
