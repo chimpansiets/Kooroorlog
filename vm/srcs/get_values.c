@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/11 12:28:22 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/17 14:43:59 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/18 17:40:31 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,32 +44,6 @@ void	set_carry(t_cursor *cursor, int write_value)
 		cursor->carry = 0;
 }
 
-// int		get_value(t_cursor *cursor, uint8_t arena[MEM_SIZE], int argument_nb, int reg_use)
-// {
-// 	int		offset;
-	
-// 	if (cursor->type_arguments[argument_nb - 1] == T_REG)
-// 	{
-// 		if (reg_use == NUMBER)
-// 			return ((int)arena[(cursor->position + cursor->has_encoding_byte + 1) % MEM_SIZE]);
-// 		else if (reg_use == VALUE)
-// 			return (cursor->registries[arena[(cursor->position + cursor->has_encoding_byte + 1) % MEM_SIZE] - 1]);
-// 	}
-// 	else if (cursor->type_arguments[argument_nb - 1] == T_DIR)
-// 	{
-// 		if (op_tab[cursor->opcode - 1].label_size == 2)
-// 			return ((int)(*((short *)&arena[(cursor->position + cursor->has_encoding_byte + 1) % MEM_SIZE])));
-// 		else if (op_tab[cursor->opcode - 1].label_size == 4)
-// 			return ((int)(*((int *)&arena[(cursor->position + cursor->has_encoding_byte + 1) % MEM_SIZE])));
-// 	}
-// 	else if (cursor->type_arguments[argument_nb - 1] == T_IND)
-// 	{
-// 		offset = *((int *)&arena[(cursor->position + cursor->has_encoding_byte + 1) % MEM_SIZE]);
-// 		offset = reverse_bytes(offset) % IDX_MOD;
-// 		return (*((int *)&arena[(cursor->position + cursor->has_encoding_byte + offset) % MEM_SIZE]));
-// 	}
-// }
-
 int		get_value(t_cursor *cursor, uint8_t arena[MEM_SIZE], int argument_nb, int to_truncate)
 {
 	int 	label_size;
@@ -86,7 +60,9 @@ int		get_value(t_cursor *cursor, uint8_t arena[MEM_SIZE], int argument_nb, int t
 	else if (cursor->type_arguments[argument_nb - 1] == T_IND)
 	{
 		offset = reverse_2bytes(*(short *)&arena[(cursor->position + cursor->argument_position[argument_nb - 1] + cursor->has_encoding_byte) % MEM_SIZE]);
-		if (to_truncate == 1)
+		if (offset < 0 && to_truncate == 1)
+			return (*(int *)&arena[(cursor->position + (offset % -(IDX_MOD))) % MEM_SIZE]);
+		else if (to_truncate == 1)
 			return (*(int *)&arena[(cursor->position + (offset % IDX_MOD)) % MEM_SIZE]);
 		else
 			return (*(int *)&arena[(cursor->position + offset) % MEM_SIZE]);

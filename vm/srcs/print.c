@@ -6,7 +6,7 @@
 /*   By: avan-rei <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/03 13:59:21 by avan-rei       #+#    #+#                */
-/*   Updated: 2019/12/17 16:07:07 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/18 17:40:34 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,22 @@ void	print_cursor(t_vm *vm)
 		ft_printf("\nCursor ID: %i\n", current->id);
 		ft_printf("Opcode: %i\n", current->opcode);
 		ft_printf("Last live: %i\n", current->last_live);
-		ft_printf("Jump: %i\n", current->jump);
 		ft_printf("Wait cycles: %i\n", current->wait_cycles);
 		ft_printf("Position: %i\n\n", current->position);
 		current = current->next;
+	}
+}
+
+void	print_registries(t_cursor *cursor)
+{
+	int		reg_nb;
+
+	reg_nb = 0;
+
+	while (reg_nb < REG_NUMBER)
+	{
+		ft_printf("reg %i: %i\n", reg_nb, cursor->registries[reg_nb]);
+		reg_nb++;
 	}
 }
 

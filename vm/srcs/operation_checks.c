@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 15:23:56 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/17 14:43:54 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/18 17:40:27 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@ int		validate_registry_numbers(t_cursor *cursor, uint8_t arena[MEM_SIZE])
 		}
 		i++;
 	}
+	reg_number = arena[(cursor->position + cursor->has_encoding_byte + cursor->argument_position[i]) % MEM_SIZE];
+	if (reg_number < 1 || REG_NUMBER < reg_number)
+		return (0);
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: avan-rei <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/02 15:16:54 by avan-rei       #+#    #+#                */
-/*   Updated: 2019/12/03 16:29:12 by avan-rei      ########   odam.nl         */
+/*   Updated: 2019/12/18 14:03:08 by avan-rei      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void		errors(t_error type)
 	if (type == amount_args)
 		ft_putstr_fd("Error: invalid amount of arguments.\n", 2);
 	else if (type == invalid_flag)
-		ft_putstr_fd("Error: invalid flag.\n", 2);
+		ft_putstr_fd("Error: invalid flag or flag argument.\n", 2);
 	else if (type == invalid_id)
 		ft_putstr_fd("Error: invalid player id.\n", 2);
 	else if (type == invalid_player_file)

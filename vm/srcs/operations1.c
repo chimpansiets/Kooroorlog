@@ -6,7 +6,7 @@
 /*   By: svoort <marvin@codam.nl>                     +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 12:47:57 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/18 11:51:34 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/18 17:40:26 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ static void	report_player_live(t_player *players, int id)
 	{
 		if (-(curr_player->id) == id)
 		{
-			// ft_printf("reporto: %i\n", id);
 			curr_player->last_alive = 0;
 			return ;
 		}
@@ -52,8 +51,12 @@ void		ld(t_cursor *cursor, uint8_t arena[MEM_SIZE])
 	
 	load_value = get_value(cursor, arena, 1, TRUNCATE);
 	set_carry(cursor, load_value);
-	registry_nb = arena[cursor->position + cursor->has_encoding_byte + cursor->argument_position[1]];
+	registry_nb = arena[(cursor->position + cursor->has_encoding_byte + cursor->argument_position[1]) % MEM_SIZE];
+	if (registry_nb - 1 < 0)
+		ft_printf("ld ruk: %i", registry_nb);
 	cursor->registries[registry_nb - 1] = load_value;
+	ft_printf("load_val: %i, reg_nb: %i\n", load_value, registry_nb);
+	// print_registries(cursor);
 }
 
 void		st(t_cursor *cursor, uint8_t arena[MEM_SIZE])
@@ -70,7 +73,11 @@ void		st(t_cursor *cursor, uint8_t arena[MEM_SIZE])
 	else
 	{
 		argument_two = *((short *)&arena[(cursor->position + cursor->has_encoding_byte + cursor->argument_position[1]) % MEM_SIZE]);
-		argument_two = reverse_2bytes(argument_two) % IDX_MOD;
+		argument_two = reverse_2bytes(argument_two);
+		if (argument_two < 0)
+			argument_two = argument_two % -(IDX_MOD);
+		else
+			argument_two = argument_two % IDX_MOD;
 		ft_memcpy_corewar(arena, cursor->position + argument_two, &to_store, 4);
 	}
 }
@@ -85,7 +92,9 @@ void		add(t_cursor *cursor, uint8_t arena[MEM_SIZE])
 	value1 = reverse_bytes(get_value(cursor, arena, 1, TRUNCATE_UNDEFINED));
 	value2 = reverse_bytes(get_value(cursor, arena, 2, TRUNCATE_UNDEFINED));
 	write_value = value1 + value2;
-	registry_nb = arena[cursor->position + cursor->has_encoding_byte + cursor->argument_position[2]];
+	registry_nb = arena[(cursor->position + cursor->has_encoding_byte + cursor->argument_position[2]) % MEM_SIZE];
+	if (registry_nb - 1 < 0)
+		ft_printf("add ruk: %i", registry_nb);
 	cursor->registries[registry_nb - 1] = reverse_bytes(write_value);
 	set_carry(cursor, write_value);
 }

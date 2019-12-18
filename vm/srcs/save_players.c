@@ -6,7 +6,7 @@
 /*   By: avan-rei <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/03 12:59:03 by avan-rei       #+#    #+#                */
-/*   Updated: 2019/12/18 12:58:41 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/18 14:02:57 by avan-rei      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,10 @@ static void		find_n_flag(t_vm *vm, int argc, char **argv)
 		{
             while (ft_strnequ(argv[i], "-n", 2) == 1 && check_flag(argv[i], 'n') == 1)
                 i++;
-            if (check_id(argv[i]))
+            if (check_id(argv[i]) && i <= argc - 1)
 			    lstadd_player(vm, &vm->players, lstnew_player(argv[i + 1], ft_atoi(argv[i])));
+			else
+				print_error(invalid_flag);
 		}
 		i++;
 	}
@@ -113,15 +115,22 @@ void			save_players(t_vm *vm, int argc, char **argv)
 
 	i = 1;
     id = 1;
-	find_n_flag(vm , argc, argv);
-	find_d_flag(vm , argc, argv);
+	find_n_flag(vm, argc, argv);
+	find_d_flag(vm, argc, argv);
 	while (i < argc)
 	{
-        if (ft_strnequ(argv[i], "-n", 2) == 1 || ft_strnequ(argv[i], "-d", 2) == 1 || ft_strnequ(argv[i], "-dump", 5) == 1)
+        if (ft_strnequ(argv[i], "-n", 2) == 1)
         {
-            while (ft_strnequ(argv[i], "-n", 2) == 1 || ft_strnequ(argv[i], "-d", 2) == 1 || ft_strnequ(argv[i], "-dump", 5) == 1)
-                i++;
+            while (ft_strnequ(argv[i], "-n", 2) == 1)
+				i++;
             i += 2;
+            continue ;
+        }
+		else if (ft_strnequ(argv[i], "-d", 2) == 1 || ft_strnequ(argv[i], "-dump", 5) == 1)
+        {
+            while (ft_strnequ(argv[i], "-d", 2) == 1 || ft_strnequ(argv[i], "-dump", 5) == 1)
+				i++;
+            i++;
             continue ;
         }
         while (id_is_free(vm, id) == 0)

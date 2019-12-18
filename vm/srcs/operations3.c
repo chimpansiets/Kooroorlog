@@ -6,7 +6,7 @@
 /*   By: svoort <marvin@codam.nl>                     +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 15:36:10 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/18 12:38:28 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/18 17:32:09 by avan-rei      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,13 @@ void	fork_corewar(t_vm *vm, t_cursor *cursor, uint8_t arena[MEM_SIZE])
 	new->carry = cursor->carry;
 	new->last_live = cursor->last_live;
 	new->wait_cycles = -1;
-	new->jump = cursor->jump;
 	registry_cpy(new, cursor);
 	offset = get_value(cursor, arena, 1, TRUNCATE_UNDEFINED);
 	offset = reverse_2bytes(offset);
-	new->position = (cursor->position + (offset % IDX_MOD)) % MEM_SIZE;
+	if (offset < 0)
+		new->position = (cursor->position + (offset % -(IDX_MOD))) % -(MEM_SIZE);
+	else
+		new->position = (cursor->position + (offset % IDX_MOD)) % MEM_SIZE;
 	lstadd_cursor(&(vm->cursors), new);
 }
 
@@ -51,7 +53,9 @@ void		lld(t_cursor *cursor, uint8_t arena[MEM_SIZE])
 	
 	load_value = get_value(cursor, arena, 1, NO_TRUNCATE);
 	set_carry(cursor, load_value);
-	registry_nb = arena[cursor->position + cursor->has_encoding_byte + cursor->argument_position[1]];
+	registry_nb = arena[(cursor->position + cursor->has_encoding_byte + cursor->argument_position[1]) % MEM_SIZE];
+	if (registry_nb - 1 < 0)
+		ft_printf("lld ruk: %i", registry_nb);
 	cursor->registries[registry_nb - 1] = load_value;
 }
 
@@ -71,9 +75,14 @@ void	lldi(t_cursor *cursor, uint8_t arena[MEM_SIZE])
 		value2 = reverse_2bytes(get_value(cursor, arena, 2, TRUNCATE_UNDEFINED));
 	else
 		value2 = reverse_bytes(get_value(cursor, arena, 2, NO_TRUNCATE));
-	registry_nb = get_value(cursor, arena, 3, TRUNCATE_UNDEFINED);
+	registry_nb = arena[(cursor->position + cursor->has_encoding_byte + cursor->argument_position[1]) % MEM_SIZE];
 	offset = (value1 + value2);
-	to_store = *(int *)&arena[cursor->position + offset % MEM_SIZE];
+	if ((cursor->position + offset) < 0)
+		to_store = *(int *)&arena[cursor->position + offset % -(MEM_SIZE)];
+	else
+		to_store = *(int *)&arena[cursor->position + offset % MEM_SIZE];
+	if (registry_nb - 1 < 0)
+		ft_printf("lldi ruk: %i", registry_nb);
 	cursor->registries[registry_nb - 1] = to_store;
 }
 
@@ -89,11 +98,13 @@ void	lfork(t_vm *vm, t_cursor *cursor, uint8_t arena[MEM_SIZE])
 	new->carry = cursor->carry;
 	new->last_live = cursor->last_live;
 	new->wait_cycles = -1;
-	new->jump = cursor->jump;
 	registry_cpy(new, cursor);
 	offset = get_value(cursor, arena, 1, TRUNCATE_UNDEFINED);
 	offset = reverse_2bytes(offset);
-	new->position = (cursor->position + offset) % MEM_SIZE;
+	if ((cursor->position + offset) < 0)
+		new->position = (cursor->position + offset) % -(MEM_SIZE);
+	else
+		new->position = (cursor->position + offset) % MEM_SIZE;
 	lstadd_cursor(&(vm->cursors), new);
 }
 

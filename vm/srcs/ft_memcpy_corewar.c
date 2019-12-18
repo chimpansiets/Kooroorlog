@@ -6,7 +6,7 @@
 /*   By: svoort <marvin@codam.nl>                     +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/16 16:28:55 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/17 11:27:14 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/18 17:32:17 by avan-rei      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 
 void	*ft_memcpy_corewar(uint8_t arena[MEM_SIZE], int position, void *to_write, int size)
 {
-	int i;
-	unsigned char *cpy;
+	int				i;
+	unsigned char	*cpy;
 
-	cpy = to_write;
+	cpy = (unsigned char*)to_write;
 	i = 0;
 	while(i < size)
 	{
