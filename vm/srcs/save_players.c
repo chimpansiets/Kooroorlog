@@ -6,7 +6,7 @@
 /*   By: avan-rei <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/03 12:59:03 by avan-rei       #+#    #+#                */
-/*   Updated: 2019/12/09 17:39:47 by avan-rei      ########   odam.nl         */
+/*   Updated: 2019/12/18 12:58:41 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,15 @@ static void		find_d_flag(t_vm *vm, int argc, char **argv)
 {
 	int i;
 
-	i = 0;
+	i = 1;
 	while (i < argc)
 	{
 		if ((ft_strnequ(argv[i], "-d", 2) == 1 || ft_strnequ(argv[i], "-dump", 5) == 1) && check_flag(argv[i], 'd') == 1)
 		{
 			while ((ft_strnequ(argv[i], "-d", 2) == 1 || ft_strnequ(argv[i], "-dump", 5) == 1) && check_flag(argv[i], 'd') == 1)
 				i++;
+			if (ft_is_int(argv[i]) != 1)
+				print_error(invalid_flag);
 			vm->dump_flag = ft_atoi(argv[i]);
 			vm->flag = ft_strdup(argv[i - 1]);
 		}

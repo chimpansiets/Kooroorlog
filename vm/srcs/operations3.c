@@ -6,7 +6,7 @@
 /*   By: svoort <marvin@codam.nl>                     +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 15:36:10 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/17 17:30:02 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/18 12:38:28 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	fork_corewar(t_vm *vm, t_cursor *cursor, uint8_t arena[MEM_SIZE])
 	new->jump = cursor->jump;
 	registry_cpy(new, cursor);
 	offset = get_value(cursor, arena, 1, TRUNCATE_UNDEFINED);
+	offset = reverse_2bytes(offset);
 	new->position = (cursor->position + (offset % IDX_MOD)) % MEM_SIZE;
 	lstadd_cursor(&(vm->cursors), new);
 }
@@ -91,6 +92,7 @@ void	lfork(t_vm *vm, t_cursor *cursor, uint8_t arena[MEM_SIZE])
 	new->jump = cursor->jump;
 	registry_cpy(new, cursor);
 	offset = get_value(cursor, arena, 1, TRUNCATE_UNDEFINED);
+	offset = reverse_2bytes(offset);
 	new->position = (cursor->position + offset) % MEM_SIZE;
 	lstadd_cursor(&(vm->cursors), new);
 }

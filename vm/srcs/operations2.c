@@ -6,7 +6,7 @@
 /*   By: svoort <marvin@codam.nl>                     +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 15:36:06 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/17 17:10:08 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/18 12:40:59 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,5 @@ void	sti(t_cursor *cursor, uint8_t arena[MEM_SIZE])
 		value3 = reverse_bytes(get_value(cursor, arena, 3, NO_TRUNCATE));
 	else
 		value3 = reverse_2bytes(get_value(cursor, arena, 3, NO_TRUNCATE));
-	ft_printf("%i\n", cursor->position + value2 + value3);
 	ft_memcpy_corewar(arena, (cursor->position + ((value2 + value3) % IDX_MOD)) % MEM_SIZE, &write_value, 4);
 }

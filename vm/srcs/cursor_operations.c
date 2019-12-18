@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 14:31:16 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/17 16:57:46 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/18 12:23:25 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void		check_operation(t_vm *vm, t_cursor *cursor, uint8_t arena[MEM_SIZE])
 		{
 			// ft_printf("%i\n", cursor->wait_cycles);
 			execute_operations(vm, cursor, arena);
-			if (cursor->opcode != 9)
+			if (cursor->opcode != 9 || cursor->carry == 0)
 				move_cursor_to_next_operation(cursor, arena);
 			reset_cursor(cursor);
 			return ;
