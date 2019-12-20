@@ -6,7 +6,7 @@
 /*   By: svoort <marvin@codam.nl>                     +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 12:30:14 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/17 16:53:00 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/20 13:26:49 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,9 @@ void		execute_operations(t_vm *vm, t_cursor *cursor, uint8_t arena[MEM_SIZE])
 		lfork(vm, cursor, arena);		
 	else if (Opekōdo == 16)
 		aff(cursor, arena);
+	if (cursor->jump != 0)
+	{
+		ft_printf("HALLOO\n\n\nOpcode = %i\n", cursor->opcode);
+		exit(0);
+	}
 }

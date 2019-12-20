@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 14:31:16 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/18 12:23:25 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/20 12:33:08 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void		check_operation(t_vm *vm, t_cursor *cursor, uint8_t arena[MEM_SIZE])
 		if (cursor->wait_cycles == 0 && (ret_encoding_bytuh = validate_encoding_byte(cursor, arena)) && \
 			initialize_argument_pos(cursor) && (ret_reg = validate_registry_numbers(cursor, arena)))
 		{
-			// ft_printf("%i\n", cursor->wait_cycles);
 			execute_operations(vm, cursor, arena);
 			if (cursor->opcode != 9 || cursor->carry == 0)
 				move_cursor_to_next_operation(cursor, arena);

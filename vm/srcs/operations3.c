@@ -6,7 +6,7 @@
 /*   By: svoort <marvin@codam.nl>                     +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/10 15:36:10 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/18 17:32:09 by avan-rei      ########   odam.nl         */
+/*   Updated: 2019/12/20 12:08:40 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void		lld(t_cursor *cursor, uint8_t arena[MEM_SIZE])
 	load_value = get_value(cursor, arena, 1, NO_TRUNCATE);
 	set_carry(cursor, load_value);
 	registry_nb = arena[(cursor->position + cursor->has_encoding_byte + cursor->argument_position[1]) % MEM_SIZE];
-	if (registry_nb - 1 < 0)
+	if (registry_nb - 1 < 0 || registry_nb - 1 > 15)
 		ft_printf("lld ruk: %i", registry_nb);
 	cursor->registries[registry_nb - 1] = load_value;
 }
@@ -81,7 +81,7 @@ void	lldi(t_cursor *cursor, uint8_t arena[MEM_SIZE])
 		to_store = *(int *)&arena[cursor->position + offset % -(MEM_SIZE)];
 	else
 		to_store = *(int *)&arena[cursor->position + offset % MEM_SIZE];
-	if (registry_nb - 1 < 0)
+	if (registry_nb - 1 < 0 || registry_nb - 1 > 15)
 		ft_printf("lldi ruk: %i", registry_nb);
 	cursor->registries[registry_nb - 1] = to_store;
 }
@@ -113,5 +113,5 @@ void	aff(t_cursor *cursor, uint8_t arena[MEM_SIZE])
 	char	write_value;
 
 	write_value = (char)get_value(cursor, arena, 1, TRUNCATE_UNDEFINED);
-	ft_printf("%c", write_value);
+	ft_printf("%i", write_value);
 }

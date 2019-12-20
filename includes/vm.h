@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/08/15 14:14:01 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/17 14:43:39 by svoort        ########   odam.nl         */
+/*   Updated: 2019/12/20 12:39:47 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ typedef struct		s_vm {
 void				print_error(t_error type);
 void				print_players(t_vm *vm);
 void				print_cursor(t_vm *vm);
+void				print_registries(t_cursor *cursor);
 
 void				lstadd_player(t_vm *vm, t_player **head, t_player *new);
 
