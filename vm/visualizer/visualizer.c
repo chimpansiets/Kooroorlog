@@ -5,7 +5,15 @@
 /*                                                     +:+                    */
 /*   By: ccoers <marvin@codam.nl>                     +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/01/06 13:07:07 by ccoers        #+#    #+#                 */
-/*   Updated: 2020/01/06 13:07:09 by ccoers        ########   odam.nl         */
+/*   Created: 2020/01/06 13:07:07 by ccoers         #+#    #+#                */
+/*   Updated: 2020/01/07 12:25:09 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <curses.h>
+
+int		main()
+{
+	initscr();
+	WINDOW * win = newwin(1337, 1337, 1337, 1337);
+}

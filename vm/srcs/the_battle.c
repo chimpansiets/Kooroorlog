@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/04 16:25:47 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/20 16:16:02 by svoort        ########   odam.nl         */
+/*   Updated: 2020/01/07 11:38:09 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void		the_battle(t_vm *vm)
 			execute_cursors(vm);
 			i++;
 			ctr++;
-			if (ctr == 3022)
+			if (ctr == 3041)
 				print_cursor(vm);
 		}
 		vm->check_counter++;
