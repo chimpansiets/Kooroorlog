@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 14:31:16 by svoort         #+#    #+#                */
-/*   Updated: 2019/12/20 12:33:08 by svoort        ########   odam.nl         */
+/*   Updated: 2020/01/07 17:48:11 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,11 @@ void		check_operation(t_vm *vm, t_cursor *cursor, uint8_t arena[MEM_SIZE])
 {
 	int		ret_encoding_bytuh;
 	int		ret_reg;
-	
+	int		i;
+
+	i = 0;
+	ret_encoding_bytuh = -1;
+	ret_reg = -1;
 	if (is_valid_operation(cursor, arena))
 	{
 		if (cursor->wait_cycles == -1)
@@ -52,10 +56,25 @@ void		check_operation(t_vm *vm, t_cursor *cursor, uint8_t arena[MEM_SIZE])
 			reset_cursor(cursor);
 			return ;
 		}
+		else if (cursor->wait_cycles == 0 && ret_encoding_bytuh == 1)
+		{
+			move_cursor_to_next_operation(cursor, arena);
+			reset_cursor(cursor);
+			return ;
+		}
 		else if (cursor->wait_cycles == 0)
 		{
-			// ft_printf("ret_encodo: %i, ret_reg: %i\n", ret_encoding_bytuh, ret_reg);
 			move_cursor_to_next_byte(cursor, arena);
+			if ((cursor->opcode == 4 || cursor->opcode == 5 || cursor->opcode == 16) && cursor->carry == 1)
+			{
+				while (i < op_tab[cursor->opcode - 1].amount_args)
+				{
+					move_cursor_to_next_byte(cursor, arena);
+					i++;
+				}
+			}
+			else
+				move_cursor_to_next_byte(cursor, arena);
 			reset_cursor(cursor);
 			return ;
 		}
