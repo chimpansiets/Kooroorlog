@@ -6,7 +6,7 @@
 /*   By: svoort <svoort@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/12/05 14:31:16 by svoort         #+#    #+#                */
-/*   Updated: 2020/01/07 17:48:11 by svoort        ########   odam.nl         */
+/*   Updated: 2020/01/09 13:08:06 by svoort        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,42 +41,50 @@ void		check_operation(t_vm *vm, t_cursor *cursor, uint8_t arena[MEM_SIZE])
 	int		i;
 
 	i = 0;
-	ret_encoding_bytuh = -1;
-	ret_reg = -1;
+	ret_encoding_bytuh = 0;
+	ret_reg = 0;
 	if (is_valid_operation(cursor, arena))
 	{
 		if (cursor->wait_cycles == -1)
 			assign_new_opcode(cursor, arena);
-		if (cursor->wait_cycles == 0 && (ret_encoding_bytuh = validate_encoding_byte(cursor, arena)) && \
-			initialize_argument_pos(cursor) && (ret_reg = validate_registry_numbers(cursor, arena)))
+		if (cursor->wait_cycles == 0)
 		{
+			// ret_encoding_bytuh = validate_encoding_byte(cursor, arena);
+			// if (ret_encoding_bytuh == 1)
+			// {
+			// 	initialize_argument_pos(cursor);
+			// 	ret_reg = validate_registry_numbers(cursor, arena);
+			// }
+			// if (ret_encoding_bytuh == 1 && ret_reg == 1)
+			// {
 			execute_operations(vm, cursor, arena);
 			if (cursor->opcode != 9 || cursor->carry == 0)
 				move_cursor_to_next_operation(cursor, arena);
 			reset_cursor(cursor);
 			return ;
-		}
-		else if (cursor->wait_cycles == 0 && ret_encoding_bytuh == 1)
-		{
-			move_cursor_to_next_operation(cursor, arena);
-			reset_cursor(cursor);
-			return ;
-		}
-		else if (cursor->wait_cycles == 0)
-		{
-			move_cursor_to_next_byte(cursor, arena);
-			if ((cursor->opcode == 4 || cursor->opcode == 5 || cursor->opcode == 16) && cursor->carry == 1)
-			{
-				while (i < op_tab[cursor->opcode - 1].amount_args)
-				{
-					move_cursor_to_next_byte(cursor, arena);
-					i++;
-				}
-			}
-			else
-				move_cursor_to_next_byte(cursor, arena);
-			reset_cursor(cursor);
-			return ;
+			// }
+			// else if (ret_encoding_bytuh == 1)
+			// {
+			// 	move_cursor_to_next_operation(cursor, arena);
+			// 	reset_cursor(cursor);
+			// 	return ;
+			// }
+			// else
+			// {
+			// 	move_cursor_to_next_byte(cursor, arena);
+			// 	if ((cursor->opcode == 4 || cursor->opcode == 5 || cursor->opcode == 16) && cursor->carry == 1)
+			// 	{
+			// 		while (i < op_tab[cursor->opcode - 1].amount_args)
+			// 		{
+			// 			move_cursor_to_next_byte(cursor, arena);
+			// 			i++;
+			// 		}
+			// 	}
+			// 	else
+			// 		move_cursor_to_next_byte(cursor, arena);
+			// 	reset_cursor(cursor);
+			// 	return ;
+			// }
 		}
 	}
 	if (cursor->wait_cycles == -1)
