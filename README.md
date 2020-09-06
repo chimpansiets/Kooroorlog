@@ -1,7 +1,5 @@
 # Corewar
 
-[![Chimpansiets's github stats](https://github-readme-stats.vercel.app/api?username=chimpansiets)](https://github.com/anuraghazra/github-readme-stats)
-
 A 42 School Silicon Valley algorithms project.
 
 _image below is not our own visualizer_
@@ -64,6 +62,8 @@ There are many options, including (again, read corewar.pdf for more info):
 * **Chesco coers** - [Chesco coers](https://github.com/*)
 * **Annelein van Reijen** - [Annelein van Reijen](https://github.com/*)
 * **Sietse Voort** - [Sietse Voort](https://github.com/chimpansiets)
+
+[![Chimpansiets's github stats](https://github-readme-stats.vercel.app/api?username=chimpansiets)](https://github.com/anuraghazra/github-readme-stats)
 
 ## License
 
