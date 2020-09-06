@@ -63,7 +63,8 @@ There are many options, including (again, read corewar.pdf for more info):
 * **Annelein van Reijen** - [Annelein van Reijen](https://github.com/*)
 * **Sietse Voort** - [Sietse Voort](https://github.com/chimpansiets)
 
-[![Chimpansiets's github stats](https://github-readme-stats.vercel.app/api?username=chimpansiets)](https://github.com/anuraghazra/github-readme-stats)
+[![Chimpansiets's github stats](https://github-readme-stats.vercel.app/api?username=chimpansiets&theme=great-gatsby&show_icons=true)](https://github.com/anuraghazra/github-readme-stats)
+[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=chimpansiets&theme=great-gatsby&show_icons=true)](https://github.com/anuraghazra/github-readme-stats)
 
 ## License
 
